@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="notes">
+
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name="org.fusesource.restygwt.RestyGWT"/>
+
+    <entry-point class="com.bbende.notes.client.NotesGwt"/>
+
+    <source path="client"/>
+
+</module>
