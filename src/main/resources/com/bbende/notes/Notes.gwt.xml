@@ -4,8 +4,21 @@
     <inherits name='com.google.gwt.user.User'/>
     <inherits name="org.fusesource.restygwt.RestyGWT"/>
 
-    <entry-point class="com.bbende.notes.client.NotesGwt"/>
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+    <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
+    <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+
+    <inherits name="com.google.gwt.activity.Activity"/>
+    <inherits name="com.google.gwt.place.Place"/>
+
+    <!-- Use ClientFactoryImpl by default -->
+    <replace-with class="com.bbende.notes.client.ClientFactoryImpl">
+        <when-type-is class="com.bbende.notes.client.ClientFactory"/>
+    </replace-with>
+
+    <entry-point class="com.bbende.notes.client.App"/>
 
     <source path="client"/>
+    <source path="shared" />
 
 </module>

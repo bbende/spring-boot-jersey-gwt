@@ -41,6 +41,16 @@ public class NoteResource {
     private final List<Note> notes = new ArrayList<Note>();
     private final AtomicInteger idCounter = new AtomicInteger(1);
 
+    public NoteResource() {
+        Note note1 = new Note();
+        note1.setText("This is note 1.");
+        create(note1);
+
+        Note note2 = new Note();
+        note2.setText("This is note 2.");
+        create(note2);
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getNotes() {
