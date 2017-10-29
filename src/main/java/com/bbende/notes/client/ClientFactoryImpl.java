@@ -32,7 +32,7 @@ public class ClientFactoryImpl implements ClientFactory {
     private static final EventBus EVENT_BUS = new SimpleEventBus();
     private static final PlaceController PLACE_CONTROLLER = new PlaceController(EVENT_BUS);
     private static final NotesService NOTES_SERVICE = GWT.create(NotesService.class);
-    private static final HomeView HOME_VIEW = new HomeViewImpl();
+    private static final HomeView HOME_VIEW = new HomeViewImpl(PLACE_CONTROLLER);
 
     @Override
     public EventBus getEventBus() {

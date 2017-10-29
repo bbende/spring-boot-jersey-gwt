@@ -27,6 +27,7 @@ language governing permissions and limitations under the License. -->
         <spring.boot.version>2.0.0.M5</spring.boot.version>
         <gwt.version>2.8.2</gwt.version>
         <gwt.resty.version>2.2.0</gwt.resty.version>
+        <gwt.material.version>2.0-rc7</gwt.material.version>
         <server.port>8080</server.port>
     </properties>
 
@@ -101,6 +102,27 @@ language governing permissions and limitations under the License. -->
             <groupId>org.fusesource.restygwt</groupId>
             <artifactId>restygwt</artifactId>
             <version>${gwt.resty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.gwtmaterialdesign</groupId>
+            <artifactId>gwt-material</artifactId>
+            <version>${gwt.material.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.gwt</groupId>
+                    <artifactId>gwt-dev</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.gwtmaterialdesign</groupId>
+            <artifactId>gwt-material-themes</artifactId>
+            <version>${gwt.material.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.gwtmaterialdesign</groupId>
+            <artifactId>gwt-material-addins</artifactId>
+            <version>${gwt.material.version}</version>
         </dependency>
         <!-- Test Dependencies -->
         <dependency>

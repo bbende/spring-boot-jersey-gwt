@@ -22,18 +22,18 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 /**
  * @author bbende
  */
-public class HomePlace extends Place {
+public class NotesListPlace extends Place {
 
-    public static class Tokenizer implements PlaceTokenizer<HomePlace> {
+    public static class Tokenizer implements PlaceTokenizer<NotesListPlace> {
 
         @Override
-        public String getToken(HomePlace place) {
-            return "home";
+        public String getToken(NotesListPlace place) {
+            return "notes";
         }
 
         @Override
-        public HomePlace getPlace(String token) {
-            return new HomePlace();
+        public NotesListPlace getPlace(String token) {
+            return new NotesListPlace();
         }
 
     }

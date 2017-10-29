@@ -17,38 +17,24 @@
 package com.bbende.notes.client.activity;
 
 import com.bbende.notes.client.ClientFactory;
-import com.bbende.notes.client.view.HomeView;
+import com.bbende.notes.client.view.NoteAddView;
+import com.bbende.notes.client.view.NoteAddViewImpl;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 /**
  * @author bbende
  */
-public class HomeActivity extends Activity {
+public class NoteAddActivity extends Activity {
 
-    public HomeActivity(ClientFactory clientFactory) {
+    public NoteAddActivity(ClientFactory clientFactory) {
         super(clientFactory);
     }
 
     @Override
     public void start(AcceptsOneWidget panel, EventBus eventBus) {
-        final HomeView homeView = getClientFactory().getHomeView();
-        homeView.setActivity(this);
-        panel.setWidget(homeView.asWidget());
-    }
-
-    @Override
-    public String mayStop() {
-        return "Please hold on. This activity is stopping.";
-    }
-
-    @Override
-    public void onCancel() {
-        super.onCancel();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+        NoteAddView notesAddView = new NoteAddViewImpl();
+        notesAddView.setActivity(this);
+        panel.setWidget(notesAddView.asWidget());
     }
 }

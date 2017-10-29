@@ -1,13 +1,14 @@
 package com.bbende.notes.client.view;
 
-import com.bbende.notes.client.activity.Activity;
-import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
+ * Overall view for the application.
+ *
  * @author bbende
  */
-public interface HomeView extends IsWidget {
+public interface HomeView extends View {
 
-    void setActivity(Activity activity);
+    SimplePanel getContentPanel();
 
 }

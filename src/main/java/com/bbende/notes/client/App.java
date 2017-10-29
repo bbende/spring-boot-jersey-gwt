@@ -16,8 +16,8 @@
  */
 package com.bbende.notes.client;
 
-import com.bbende.notes.client.place.HomePlace;
-import com.bbende.notes.client.service.NotesService;
+import com.bbende.notes.client.place.NotesListPlace;
+import com.bbende.notes.client.view.HomeView;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
@@ -26,7 +26,6 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.web.bindery.event.shared.EventBus;
 import org.fusesource.restygwt.client.Defaults;
 
@@ -37,8 +36,7 @@ import org.fusesource.restygwt.client.Defaults;
  */
 public class App implements EntryPoint {
 
-    private Place defaultPlace = new HomePlace();
-    private SimplePanel appWidget = new SimplePanel();
+    private Place defaultPlace = new NotesListPlace();
 
     public void onModuleLoad() {
         useCorrectRequestBaseUrl();
@@ -47,18 +45,19 @@ public class App implements EntryPoint {
         ClientFactory clientFactory = GWT.create(ClientFactory.class);
         EventBus eventBus = clientFactory.getEventBus();
         PlaceController placeController = clientFactory.getPlaceController();
+        HomeView homeView = clientFactory.getHomeView();
 
         // Start ActivityManager for the main widget with our ActivityMapper
         ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
         ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
-        activityManager.setDisplay(appWidget);
+        activityManager.setDisplay(homeView.getContentPanel());
 
         // Start PlaceHistoryHandler with our PlaceHistoryMapper
         AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
         historyHandler.register(placeController, eventBus, defaultPlace);
 
-        RootPanel.get().add(appWidget);
+        RootPanel.get().add(homeView);
 
         // Goes to place represented on URL or default place
         historyHandler.handleCurrentHistory();

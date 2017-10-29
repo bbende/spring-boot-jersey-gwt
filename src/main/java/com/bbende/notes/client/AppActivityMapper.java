@@ -16,13 +16,17 @@
  */
 package com.bbende.notes.client;
 
-import com.bbende.notes.client.activity.HomeActivity;
-import com.bbende.notes.client.place.HomePlace;
+import com.bbende.notes.client.activity.NoteAddActivity;
+import com.bbende.notes.client.activity.NotesListActivity;
+import com.bbende.notes.client.place.NoteAddPlace;
+import com.bbende.notes.client.place.NotesListPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 /**
+ * Maps Places to Activities.
+ *
  * @author bbende
  */
 public class AppActivityMapper implements ActivityMapper {
@@ -36,8 +40,10 @@ public class AppActivityMapper implements ActivityMapper {
 
     @Override
     public Activity getActivity(Place place) {
-        if (place instanceof HomePlace) {
-            return new HomeActivity(clientFactory);
+        if (place instanceof NotesListPlace) {
+            return new NotesListActivity(clientFactory);
+        } else if (place instanceof NoteAddPlace) {
+            return new NoteAddActivity(clientFactory);
         } else {
             return null;
         }

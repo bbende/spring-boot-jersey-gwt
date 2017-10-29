@@ -14,22 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client;
+package com.bbende.notes.client.view;
 
-import com.bbende.notes.client.place.NoteAddPlace;
-import com.bbende.notes.client.place.NotesListPlace;
-import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.place.shared.WithTokenizers;
+import com.bbende.notes.client.activity.Activity;
+import com.google.gwt.user.client.ui.IsWidget;
 
 /**
- * Registers the tokenizers for each Place.
- *
  * @author bbende
  */
-@WithTokenizers({
-        NotesListPlace.Tokenizer.class,
-        NoteAddPlace.Tokenizer.class
-})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
+public interface View extends IsWidget {
+
+    void setActivity(Activity activity);
 
 }

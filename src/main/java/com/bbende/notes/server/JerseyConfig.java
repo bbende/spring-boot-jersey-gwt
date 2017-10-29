@@ -16,8 +16,8 @@
  */
 package com.bbende.notes.server;
 
-import org.glassfish.jersey.server.ResourceConfig;
 import com.bbende.notes.server.api.NoteResource;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
 import javax.ws.rs.ApplicationPath;

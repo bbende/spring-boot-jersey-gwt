@@ -14,22 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client;
+package com.bbende.notes.client.view;
 
-import com.bbende.notes.client.place.NoteAddPlace;
-import com.bbende.notes.client.place.NotesListPlace;
-import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.place.shared.WithTokenizers;
+import com.bbende.notes.shared.Note;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+
+import java.util.List;
 
 /**
- * Registers the tokenizers for each Place.
- *
  * @author bbende
  */
-@WithTokenizers({
-        NotesListPlace.Tokenizer.class,
-        NoteAddPlace.Tokenizer.class
-})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
+public class NotesListViewImpl extends AbstractView implements NotesListView {
+
+    public NotesListViewImpl(List<Note> notes) {
+        FlowPanel flowPanel = new FlowPanel();
+
+        for(Note note : notes) {
+            flowPanel.add(new Label(note.getText()));
+        }
+
+        initWidget(flowPanel);
+    }
 
 }
