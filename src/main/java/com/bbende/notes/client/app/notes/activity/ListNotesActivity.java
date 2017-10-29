@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.activity;
+package com.bbende.notes.client.app.notes.activity;
 
 import com.bbende.notes.client.ClientFactory;
-import com.bbende.notes.client.service.NotesService;
-import com.bbende.notes.client.view.NotesListView;
-import com.bbende.notes.client.view.NotesListViewImpl;
+import com.bbende.notes.client.app.notes.NotesService;
+import com.bbende.notes.client.app.notes.view.ListNotesView;
+import com.bbende.notes.client.app.notes.view.ListNotesViewImpl;
+import com.bbende.notes.client.mvp.Activity;
 import com.bbende.notes.shared.Note;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -32,9 +33,9 @@ import java.util.List;
 /**
  * @author bbende
  */
-public class NotesListActivity extends Activity {
+public class ListNotesActivity extends Activity {
 
-    public NotesListActivity(ClientFactory clientFactory) {
+    public ListNotesActivity(ClientFactory clientFactory) {
         super(clientFactory);
     }
 
@@ -51,7 +52,7 @@ public class NotesListActivity extends Activity {
 
             @Override
             public void onSuccess(Method method, List<Note> response) {
-                NotesListView notesListView = new NotesListViewImpl(response);
+                ListNotesView notesListView = new ListNotesViewImpl(response);
                 notesListView.setActivity(listener);
                 panel.setWidget(notesListView.asWidget());
             }

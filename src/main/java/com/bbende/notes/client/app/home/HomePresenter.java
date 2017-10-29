@@ -14,39 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client;
+package com.bbende.notes.client.app.home;
 
-import com.bbende.notes.client.activity.NoteAddActivity;
-import com.bbende.notes.client.activity.NotesListActivity;
-import com.bbende.notes.client.place.NoteAddPlace;
-import com.bbende.notes.client.place.NotesListPlace;
-import com.google.gwt.activity.shared.Activity;
-import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.place.shared.Place;
+import com.bbende.notes.client.ClientFactory;
+import com.bbende.notes.client.app.notes.place.AddNotePlace;
+import com.bbende.notes.client.app.notes.place.ListNotesPlace;
+import gwt.material.design.client.ui.MaterialLink;
 
 /**
- * Maps Places to Activities.
- *
  * @author bbende
  */
-public class AppActivityMapper implements ActivityMapper {
+public class HomePresenter {
 
     private ClientFactory clientFactory;
 
-    public AppActivityMapper(ClientFactory clientFactory) {
-        super();
+    public HomePresenter(ClientFactory clientFactory) {
         this.clientFactory = clientFactory;
     }
 
-    @Override
-    public Activity getActivity(Place place) {
-        if (place instanceof NotesListPlace) {
-            return new NotesListActivity(clientFactory);
-        } else if (place instanceof NoteAddPlace) {
-            return new NoteAddActivity(clientFactory);
-        } else {
-            return null;
-        }
-    }
+    public void present(HomeView homeView) {
+        MaterialLink notesLink = homeView.getSideNavNotesLink();
 
+        notesLink.addClickHandler(event -> {
+            clientFactory.getPlaceController().goTo(new ListNotesPlace());
+        });
+
+        MaterialLink addNoteLink = homeView.getSideNavAddNotesLink();
+
+        addNoteLink.addClickHandler(event -> {
+            clientFactory.getPlaceController().goTo(new AddNotePlace());
+        });
+    }
 }

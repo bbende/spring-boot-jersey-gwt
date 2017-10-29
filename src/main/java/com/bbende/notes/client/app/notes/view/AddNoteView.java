@@ -14,27 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.view;
+package com.bbende.notes.client.app.notes.view;
 
-import com.bbende.notes.shared.Note;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-
-import java.util.List;
+import com.bbende.notes.client.mvp.View;
 
 /**
  * @author bbende
  */
-public class NotesListViewImpl extends AbstractView implements NotesListView {
-
-    public NotesListViewImpl(List<Note> notes) {
-        FlowPanel flowPanel = new FlowPanel();
-
-        for(Note note : notes) {
-            flowPanel.add(new Label(note.getText()));
-        }
-
-        initWidget(flowPanel);
-    }
+public interface AddNoteView extends View {
 
 }

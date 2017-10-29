@@ -1,4 +1,4 @@
-package com.bbende.notes.client.service;
+package com.bbende.notes.client.app.notes;
 
 import com.bbende.notes.shared.Note;
 import org.fusesource.restygwt.client.MethodCallback;

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.place;
+package com.bbende.notes.client.app.notes.place;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
@@ -22,18 +22,18 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 /**
  * @author bbende
  */
-public class NoteAddPlace extends Place {
+public class ListNotesPlace extends Place {
 
-    public static class Tokenizer implements PlaceTokenizer<NoteAddPlace> {
+    public static class Tokenizer implements PlaceTokenizer<ListNotesPlace> {
 
         @Override
-        public String getToken(NoteAddPlace place) {
-            return "add";
+        public String getToken(ListNotesPlace place) {
+            return "notes";
         }
 
         @Override
-        public NoteAddPlace getPlace(String token) {
-            return new NoteAddPlace();
+        public ListNotesPlace getPlace(String token) {
+            return new ListNotesPlace();
         }
 
     }

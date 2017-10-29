@@ -14,22 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client;
+package com.bbende.notes.client.app.notes.activity;
 
-import com.bbende.notes.client.place.NoteAddPlace;
-import com.bbende.notes.client.place.NotesListPlace;
-import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.place.shared.WithTokenizers;
+import com.bbende.notes.client.ClientFactory;
+import com.bbende.notes.client.app.notes.view.AddNoteView;
+import com.bbende.notes.client.app.notes.view.AddNoteViewImpl;
+import com.bbende.notes.client.mvp.Activity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 /**
- * Registers the tokenizers for each Place.
- *
  * @author bbende
  */
-@WithTokenizers({
-        NotesListPlace.Tokenizer.class,
-        NoteAddPlace.Tokenizer.class
-})
-public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
+public class AddNoteActivity extends Activity {
 
+    public AddNoteActivity(ClientFactory clientFactory) {
+        super(clientFactory);
+    }
+
+    @Override
+    public void start(AcceptsOneWidget panel, EventBus eventBus) {
+        AddNoteView notesAddView = new AddNoteViewImpl();
+        notesAddView.setActivity(this);
+        panel.setWidget(notesAddView.asWidget());
+    }
 }

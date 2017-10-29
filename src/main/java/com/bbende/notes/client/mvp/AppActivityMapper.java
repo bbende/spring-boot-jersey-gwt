@@ -14,29 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.activity;
+package com.bbende.notes.client.mvp;
 
 import com.bbende.notes.client.ClientFactory;
-import com.google.gwt.activity.shared.AbstractActivity;
+import com.bbende.notes.client.app.notes.activity.AddNoteActivity;
+import com.bbende.notes.client.app.notes.activity.ListNotesActivity;
+import com.bbende.notes.client.app.notes.place.AddNotePlace;
+import com.bbende.notes.client.app.notes.place.ListNotesPlace;
+import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 
 /**
+ * Maps Places to Activities.
+ *
  * @author bbende
  */
-public abstract class Activity extends AbstractActivity {
+public class AppActivityMapper implements ActivityMapper {
 
-    private final ClientFactory clientFactory;
+    private ClientFactory clientFactory;
 
-    public Activity(ClientFactory clientFactory) {
+    public AppActivityMapper(ClientFactory clientFactory) {
+        super();
         this.clientFactory = clientFactory;
     }
 
-    public ClientFactory getClientFactory() {
-        return clientFactory;
-    }
-
-    public void goTo(Place place) {
-        clientFactory.getPlaceController().goTo(place);
+    @Override
+    public Activity getActivity(Place place) {
+        if (place instanceof ListNotesPlace) {
+            return new ListNotesActivity(clientFactory);
+        } else if (place instanceof AddNotePlace) {
+            return new AddNoteActivity(clientFactory);
+        } else {
+            return null;
+        }
     }
 
 }

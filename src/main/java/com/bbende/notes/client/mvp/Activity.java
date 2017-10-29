@@ -14,24 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.view;
+package com.bbende.notes.client.mvp;
 
-import com.bbende.notes.client.activity.Activity;
-import com.google.gwt.user.client.ui.Composite;
+import com.bbende.notes.client.ClientFactory;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.place.shared.Place;
 
 /**
  * @author bbende
  */
-public abstract class AbstractView extends Composite implements View {
+public abstract class Activity extends AbstractActivity {
 
-    protected Activity activity;
+    private final ClientFactory clientFactory;
 
-    public Activity getActivity() {
-        return activity;
+    public Activity(ClientFactory clientFactory) {
+        this.clientFactory = clientFactory;
     }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
+    public ClientFactory getClientFactory() {
+        return clientFactory;
+    }
+
+    public void goTo(Place place) {
+        clientFactory.getPlaceController().goTo(place);
     }
 
 }

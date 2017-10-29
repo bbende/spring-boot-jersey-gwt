@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.view;
+package com.bbende.notes.client.app.notes.view;
 
+import com.bbende.notes.client.mvp.AbstractView;
 import com.google.gwt.user.client.ui.Label;
 
 /**
  * @author bbende
  */
-public class NoteAddViewImpl extends AbstractView implements NoteAddView {
+public class AddNoteViewImpl extends AbstractView implements AddNoteView {
 
-    public NoteAddViewImpl() {
+    public AddNoteViewImpl() {
         Label label = new Label("Add Note");
         initWidget(label);
     }

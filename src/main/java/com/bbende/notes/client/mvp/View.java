@@ -14,27 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.place;
+package com.bbende.notes.client.mvp;
 
-import com.google.gwt.place.shared.Place;
-import com.google.gwt.place.shared.PlaceTokenizer;
+import com.google.gwt.user.client.ui.IsWidget;
 
 /**
  * @author bbende
  */
-public class NotesListPlace extends Place {
+public interface View extends IsWidget {
 
-    public static class Tokenizer implements PlaceTokenizer<NotesListPlace> {
+    void setActivity(Activity activity);
 
-        @Override
-        public String getToken(NotesListPlace place) {
-            return "notes";
-        }
-
-        @Override
-        public NotesListPlace getPlace(String token) {
-            return new NotesListPlace();
-        }
-
-    }
 }

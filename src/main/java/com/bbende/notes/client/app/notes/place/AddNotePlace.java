@@ -14,27 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.activity;
+package com.bbende.notes.client.app.notes.place;
 
-import com.bbende.notes.client.ClientFactory;
-import com.bbende.notes.client.view.NoteAddView;
-import com.bbende.notes.client.view.NoteAddViewImpl;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.place.shared.Place;
+import com.google.gwt.place.shared.PlaceTokenizer;
 
 /**
  * @author bbende
  */
-public class NoteAddActivity extends Activity {
+public class AddNotePlace extends Place {
 
-    public NoteAddActivity(ClientFactory clientFactory) {
-        super(clientFactory);
-    }
+    public static class Tokenizer implements PlaceTokenizer<AddNotePlace> {
 
-    @Override
-    public void start(AcceptsOneWidget panel, EventBus eventBus) {
-        NoteAddView notesAddView = new NoteAddViewImpl();
-        notesAddView.setActivity(this);
-        panel.setWidget(notesAddView.asWidget());
+        @Override
+        public String getToken(AddNotePlace place) {
+            return "add";
+        }
+
+        @Override
+        public AddNotePlace getPlace(String token) {
+            return new AddNotePlace();
+        }
+
     }
 }

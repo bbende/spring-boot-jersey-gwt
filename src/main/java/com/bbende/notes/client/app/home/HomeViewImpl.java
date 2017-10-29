@@ -14,17 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.view;
+package com.bbende.notes.client.app.home;
 
-import com.bbende.notes.client.place.NoteAddPlace;
-import com.bbende.notes.client.place.NotesListPlace;
+import com.bbende.notes.client.mvp.AbstractView;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import gwt.material.design.client.constants.Color;
-import gwt.material.design.client.constants.IconType;
 import gwt.material.design.client.ui.MaterialContainer;
 import gwt.material.design.client.ui.MaterialHeader;
 import gwt.material.design.client.ui.MaterialLabel;
@@ -42,12 +37,10 @@ import gwt.material.design.client.ui.MaterialSideNavCard;
 public class HomeViewImpl extends AbstractView implements HomeView {
 
     private SimplePanel contentPanel;
+    private MaterialLink sideNavNotesLink;
+    private MaterialLink sideNavAddNoteLink;
 
-    private PlaceController placeController;
-
-    public HomeViewImpl(PlaceController placeController) {
-        this.placeController = placeController;
-
+    public HomeViewImpl() {
         MaterialNavBar navBar = createNavBar();
         MaterialSideNav sideNav = createSideNav();
 
@@ -56,6 +49,7 @@ public class HomeViewImpl extends AbstractView implements HomeView {
         header.add(sideNav);
 
         SimplePanel contentPanel = new SimplePanel();
+        contentPanel.getElement().getStyle().setPaddingLeft(20, Style.Unit.PX);
         contentPanel.add(new MaterialLabel("HOME"));
         this.contentPanel = contentPanel;
 
@@ -95,26 +89,18 @@ public class HomeViewImpl extends AbstractView implements HomeView {
     }
 
     private MaterialSideNav createSideNav() {
-        MaterialLink notesLink = new MaterialLink("Notes");
+        this.sideNavNotesLink = new MaterialLink("Notes");
         //link1.setIconType(IconType.ACCESS_ALARM);
 
-        notesLink.addClickHandler(event -> {
-            placeController.goTo(new NotesListPlace());
-        });
-
-        MaterialLink addNoteLink = new MaterialLink("Add Note");
+        this.sideNavAddNoteLink = new MaterialLink("Add Note");
         //link2.setIconType(IconType.ACCESS_ALARM);
-
-        addNoteLink.addClickHandler(event -> {
-            placeController.goTo(new NoteAddPlace());
-        });
 
         MaterialSideNav sideNav = new MaterialSideNavCard();
         sideNav.setId("mysidenav");
         sideNav.setWidth(280);
 
-        sideNav.add(notesLink);
-        sideNav.add(addNoteLink);
+        sideNav.add(sideNavNotesLink);
+        sideNav.add(sideNavAddNoteLink);
         return sideNav;
     }
 
@@ -123,4 +109,13 @@ public class HomeViewImpl extends AbstractView implements HomeView {
         return this.contentPanel;
     }
 
+    @Override
+    public MaterialLink getSideNavNotesLink() {
+        return sideNavNotesLink;
+    }
+
+    @Override
+    public MaterialLink getSideNavAddNotesLink() {
+        return sideNavAddNoteLink;
+    }
 }

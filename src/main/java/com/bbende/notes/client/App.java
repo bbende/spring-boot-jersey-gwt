@@ -16,8 +16,11 @@
  */
 package com.bbende.notes.client;
 
-import com.bbende.notes.client.place.NotesListPlace;
-import com.bbende.notes.client.view.HomeView;
+import com.bbende.notes.client.app.home.HomePresenter;
+import com.bbende.notes.client.app.home.HomeView;
+import com.bbende.notes.client.app.notes.place.ListNotesPlace;
+import com.bbende.notes.client.mvp.AppActivityMapper;
+import com.bbende.notes.client.mvp.AppPlaceHistoryMapper;
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
@@ -36,7 +39,7 @@ import org.fusesource.restygwt.client.Defaults;
  */
 public class App implements EntryPoint {
 
-    private Place defaultPlace = new NotesListPlace();
+    private Place defaultPlace = new ListNotesPlace();
 
     public void onModuleLoad() {
         useCorrectRequestBaseUrl();
@@ -45,7 +48,11 @@ public class App implements EntryPoint {
         ClientFactory clientFactory = GWT.create(ClientFactory.class);
         EventBus eventBus = clientFactory.getEventBus();
         PlaceController placeController = clientFactory.getPlaceController();
+
+        // Setup the HomeView
         HomeView homeView = clientFactory.getHomeView();
+        HomePresenter homePresenter = new HomePresenter(clientFactory);
+        homePresenter.present(homeView);
 
         // Start ActivityManager for the main widget with our ActivityMapper
         ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
