@@ -19,6 +19,7 @@ package com.bbende.notes.client;
 import com.bbende.notes.client.app.home.HomeView;
 import com.bbende.notes.client.app.home.HomeViewImpl;
 import com.bbende.notes.client.app.notes.NotesService;
+import com.bbende.notes.client.user.UserService;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
@@ -32,6 +33,7 @@ public class ClientFactoryImpl implements ClientFactory {
     private static final EventBus EVENT_BUS = new SimpleEventBus();
     private static final PlaceController PLACE_CONTROLLER = new PlaceController(EVENT_BUS);
     private static final NotesService NOTES_SERVICE = GWT.create(NotesService.class);
+    private static final UserService USER_SERVICE = GWT.create(UserService.class);
     private static final HomeView HOME_VIEW = new HomeViewImpl();
 
     @Override
@@ -47,6 +49,11 @@ public class ClientFactoryImpl implements ClientFactory {
     @Override
     public NotesService getNotesService() {
         return NOTES_SERVICE;
+    }
+
+    @Override
+    public UserService getUserService() {
+        return USER_SERVICE;
     }
 
     @Override

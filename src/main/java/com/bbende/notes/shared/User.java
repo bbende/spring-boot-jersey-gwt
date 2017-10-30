@@ -14,21 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.server;
+package com.bbende.notes.shared;
 
-import com.bbende.notes.server.api.NoteResource;
-import com.bbende.notes.server.api.UserResource;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.springframework.context.annotation.Configuration;
+/**
+ * @author bbende
+ */
+public class User {
 
-import javax.ws.rs.ApplicationPath;
+    private String username;
 
-@Configuration
-@ApplicationPath("/api")
-public class JerseyConfig extends ResourceConfig {
+    public String getUsername() {
+        return username;
+    }
 
-    public JerseyConfig() {
-        register(NoteResource.class);
-        register(UserResource.class);
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

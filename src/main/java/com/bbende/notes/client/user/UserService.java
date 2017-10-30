@@ -14,21 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.server;
+package com.bbende.notes.client.user;
 
-import com.bbende.notes.server.api.NoteResource;
-import com.bbende.notes.server.api.UserResource;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.springframework.context.annotation.Configuration;
+import com.bbende.notes.shared.User;
+import org.fusesource.restygwt.client.MethodCallback;
+import org.fusesource.restygwt.client.RestService;
+import org.fusesource.restygwt.client.TextCallback;
 
-import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 
-@Configuration
-@ApplicationPath("/api")
-public class JerseyConfig extends ResourceConfig {
+/**
+ * @author bbende
+ */
+public interface UserService extends RestService {
 
-    public JerseyConfig() {
-        register(NoteResource.class);
-        register(UserResource.class);
-    }
+    @GET
+    @Path("/api/current-user")
+    @Consumes(MediaType.APPLICATION_JSON)
+    void getCurrentUser(MethodCallback<User> callback);
+
+    @POST
+    @Path("/logout")
+    @Consumes(MediaType.TEXT_PLAIN)
+    void logout(TextCallback callback);
+
 }

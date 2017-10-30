@@ -19,7 +19,11 @@ package com.bbende.notes.client.app.home;
 import com.bbende.notes.client.ClientFactory;
 import com.bbende.notes.client.app.notes.place.AddNotePlace;
 import com.bbende.notes.client.app.notes.place.ListNotesPlace;
+import com.bbende.notes.client.user.UserService;
+import com.google.gwt.user.client.Window;
 import gwt.material.design.client.ui.MaterialLink;
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.TextCallback;
 
 /**
  * @author bbende
@@ -32,7 +36,11 @@ public class HomePresenter {
         this.clientFactory = clientFactory;
     }
 
-    public void present(HomeView homeView) {
+    public void present(HomeView homeView, String currentUser) {
+        homeView.initialize(currentUser);
+
+        // setup click handlers for menu links
+
         MaterialLink notesLink = homeView.getSideNavNotesLink();
 
         notesLink.addClickHandler(event -> {
@@ -43,6 +51,26 @@ public class HomePresenter {
 
         addNoteLink.addClickHandler(event -> {
             clientFactory.getPlaceController().goTo(new AddNotePlace());
+        });
+
+        // setup click handler for logout link
+
+        MaterialLink logoutLink = homeView.getLogoutLink();
+
+        logoutLink.addClickHandler(event -> {
+            final UserService userService = clientFactory.getUserService();
+            userService.logout(new TextCallback() {
+
+                @Override
+                public void onFailure(Method method, Throwable exception) {
+                    Window.alert("Unable to log out: " + exception.getMessage() + " " + method.getResponse().getStatusCode());
+                }
+
+                @Override
+                public void onSuccess(Method method, String response) {
+                    Window.Location.replace("/login");
+                }
+            });
         });
     }
 }

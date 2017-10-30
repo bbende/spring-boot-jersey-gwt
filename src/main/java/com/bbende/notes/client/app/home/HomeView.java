@@ -11,10 +11,14 @@ import gwt.material.design.client.ui.MaterialLink;
  */
 public interface HomeView extends View {
 
+    void initialize(String currentUser);
+
     SimplePanel getContentPanel();
 
     MaterialLink getSideNavNotesLink();
 
     MaterialLink getSideNavAddNotesLink();
+
+    MaterialLink getLogoutLink();
 
 }

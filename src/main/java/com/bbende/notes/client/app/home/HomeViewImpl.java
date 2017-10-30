@@ -39,9 +39,11 @@ public class HomeViewImpl extends AbstractView implements HomeView {
     private SimplePanel contentPanel;
     private MaterialLink sideNavNotesLink;
     private MaterialLink sideNavAddNoteLink;
+    private MaterialLink logoutLink;
 
-    public HomeViewImpl() {
-        MaterialNavBar navBar = createNavBar();
+    @Override
+    public void initialize(String currentUser) {
+        MaterialNavBar navBar = createNavBar(currentUser);
         MaterialSideNav sideNav = createSideNav();
 
         MaterialHeader header = new MaterialHeader();
@@ -64,17 +66,16 @@ public class HomeViewImpl extends AbstractView implements HomeView {
         initWidget(mainContainer);
     }
 
-    private MaterialNavBar createNavBar() {
-        MaterialLink loginLink = new MaterialLink("Login");
-        loginLink.setHref("#login");
+    private MaterialNavBar createNavBar(String currentUser) {
+        MaterialLabel userLabel = new MaterialLabel(currentUser);
 
-        MaterialLink signupLink = new MaterialLink("Sign Up");
-        loginLink.setHref("#signup");
+        this.logoutLink = new MaterialLink("Logout");
+        //logoutLink.setHref("#logout");
 
         MaterialNavSection navSection = new MaterialNavSection();
         navSection.setFloat(Style.Float.RIGHT);
-        navSection.add(loginLink);
-        navSection.add(signupLink);
+        navSection.add(userLabel);
+        navSection.add(logoutLink);
 
         MaterialNavBrand navBrand = new MaterialNavBrand("Notes");
         navBrand.setPaddingLeft(20);
@@ -118,4 +119,10 @@ public class HomeViewImpl extends AbstractView implements HomeView {
     public MaterialLink getSideNavAddNotesLink() {
         return sideNavAddNoteLink;
     }
+
+    @Override
+    public MaterialLink getLogoutLink() {
+        return logoutLink;
+    }
+
 }
