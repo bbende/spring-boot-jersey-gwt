@@ -68,7 +68,7 @@ public class HomePresenter {
 
                 @Override
                 public void onSuccess(Method method, String response) {
-                    Window.Location.replace("/login");
+                    Window.Location.replace("/login?logout");
                 }
             });
         });
