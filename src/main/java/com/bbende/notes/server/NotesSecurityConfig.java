@@ -42,13 +42,13 @@ public class NotesSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/login").permitAll()
-            .antMatchers("/", "/notes-gwt.html", "/notes/**", "/api/**").authenticated()
+            .antMatchers("/login", "/css/**", "/js/**").permitAll()
+            .antMatchers("/**").authenticated()
         .and()
             .formLogin()
             .loginPage("/login")
             .failureUrl("/login?error")
-            .defaultSuccessUrl("/notes-gwt.html")
+            .defaultSuccessUrl("/notes")
         .and()
             .logout()
             .logoutUrl("/logout")
