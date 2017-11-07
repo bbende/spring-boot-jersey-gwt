@@ -20,8 +20,8 @@ import com.bbende.notes.client.ClientFactory;
 import com.bbende.notes.client.app.notes.place.AddNotePlace;
 import com.bbende.notes.client.app.notes.place.ListNotesPlace;
 import com.bbende.notes.client.user.UserService;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
-import gwt.material.design.client.ui.MaterialLink;
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.TextCallback;
 
@@ -41,13 +41,13 @@ public class HomePresenter {
 
         // setup click handlers for menu links
 
-        MaterialLink notesLink = homeView.getSideNavNotesLink();
+        HasClickHandlers notesLink = homeView.getSideNavNotesLink();
 
         notesLink.addClickHandler(event -> {
             clientFactory.getPlaceController().goTo(new ListNotesPlace());
         });
 
-        MaterialLink addNoteLink = homeView.getSideNavAddNotesLink();
+        HasClickHandlers addNoteLink = homeView.getSideNavAddNotesLink();
 
         addNoteLink.addClickHandler(event -> {
             clientFactory.getPlaceController().goTo(new AddNotePlace());
@@ -55,7 +55,7 @@ public class HomePresenter {
 
         // setup click handler for logout link
 
-        MaterialLink logoutLink = homeView.getLogoutLink();
+        HasClickHandlers logoutLink = homeView.getLogoutLink();
 
         logoutLink.addClickHandler(event -> {
             final UserService userService = clientFactory.getUserService();

@@ -70,7 +70,7 @@ public class HomeViewImpl extends AbstractView implements HomeView {
         MaterialLabel userLabel = new MaterialLabel(currentUser);
 
         this.logoutLink = new MaterialLink("Logout");
-        //logoutLink.setHref("#logout");
+        logoutLink.setHref("#logout");
 
         MaterialNavSection navSection = new MaterialNavSection();
         navSection.setFloat(Style.Float.RIGHT);
