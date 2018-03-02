@@ -20,6 +20,20 @@ import com.bbende.notes.client.mvp.AbstractView;
 import com.bbende.notes.shared.Note;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import gwt.material.design.client.constants.Color;
+import gwt.material.design.client.constants.IconPosition;
+import gwt.material.design.client.constants.IconType;
+import gwt.material.design.client.constants.WavesType;
+import gwt.material.design.client.ui.MaterialButton;
+import gwt.material.design.client.ui.MaterialCollection;
+import gwt.material.design.client.ui.MaterialCollectionItem;
+import gwt.material.design.client.ui.MaterialCollectionSecondary;
+import gwt.material.design.client.ui.MaterialColumn;
+import gwt.material.design.client.ui.MaterialDivider;
+import gwt.material.design.client.ui.MaterialIcon;
+import gwt.material.design.client.ui.MaterialLabel;
+import gwt.material.design.client.ui.MaterialPanel;
+import gwt.material.design.client.ui.MaterialRow;
 
 import java.util.List;
 
@@ -29,13 +43,34 @@ import java.util.List;
 public class ListNotesViewImpl extends AbstractView implements ListNotesView {
 
     public ListNotesViewImpl(List<Note> notes) {
-        FlowPanel flowPanel = new FlowPanel();
+        MaterialPanel notesPanel = new MaterialPanel();
+        //notesPanel.setContainerEnabled(true);
+
+        MaterialCollection notesCollection = new MaterialCollection();
 
         for(Note note : notes) {
-            flowPanel.add(new Label(note.getText()));
+            MaterialLabel noteLabel = new MaterialLabel();
+            noteLabel.setText(note.getText());
+
+            MaterialIcon deleteIcon = new MaterialIcon();
+            deleteIcon.setIconPosition(IconPosition.RIGHT);
+            deleteIcon.setIconType(IconType.DELETE);
+            deleteIcon.setIconColor(Color.GREY_DARKEN_1);
+            deleteIcon.setWaves(WavesType.DEFAULT);
+
+            MaterialCollectionSecondary deleteSecondary = new MaterialCollectionSecondary();
+            deleteSecondary.add(deleteIcon);
+
+            MaterialCollectionItem noteItem = new MaterialCollectionItem();
+            noteItem.add(noteLabel);
+            noteItem.add(deleteSecondary);
+
+            notesCollection.add(noteItem);
         }
 
-        initWidget(flowPanel);
+        notesPanel.add(notesCollection);
+
+        initWidget(notesPanel);
     }
 
 }

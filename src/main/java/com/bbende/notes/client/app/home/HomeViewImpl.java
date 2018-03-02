@@ -19,6 +19,7 @@ package com.bbende.notes.client.app.home;
 import com.bbende.notes.client.mvp.AbstractView;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.SimplePanel;
+import gwt.material.design.client.base.AbstractSideNav;
 import gwt.material.design.client.constants.Color;
 import gwt.material.design.client.ui.MaterialContainer;
 import gwt.material.design.client.ui.MaterialHeader;
@@ -44,14 +45,15 @@ public class HomeViewImpl extends AbstractView implements HomeView {
     @Override
     public void initialize(String currentUser) {
         MaterialNavBar navBar = createNavBar(currentUser);
-        MaterialSideNav sideNav = createSideNav();
+        AbstractSideNav sideNav = createSideNav();
 
         MaterialHeader header = new MaterialHeader();
         header.add(navBar);
         header.add(sideNav);
 
         SimplePanel contentPanel = new SimplePanel();
-        contentPanel.getElement().getStyle().setPaddingLeft(20, Style.Unit.PX);
+        contentPanel.getElement().getStyle().setPaddingLeft(40, Style.Unit.PX);
+        contentPanel.getElement().getStyle().setPaddingRight(40, Style.Unit.PX);
         contentPanel.add(new MaterialLabel("HOME"));
         this.contentPanel = contentPanel;
 
@@ -89,14 +91,14 @@ public class HomeViewImpl extends AbstractView implements HomeView {
         return navBar;
     }
 
-    private MaterialSideNav createSideNav() {
+    private AbstractSideNav createSideNav() {
         this.sideNavNotesLink = new MaterialLink("Notes");
         //link1.setIconType(IconType.ACCESS_ALARM);
 
         this.sideNavAddNoteLink = new MaterialLink("Add Note");
         //link2.setIconType(IconType.ACCESS_ALARM);
 
-        MaterialSideNav sideNav = new MaterialSideNavCard();
+        AbstractSideNav sideNav = new MaterialSideNavCard();
         sideNav.setId("mysidenav");
         sideNav.setWidth(280);
 

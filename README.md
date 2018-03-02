@@ -1,5 +1,5 @@
 # spring-boot-gwt
-Example application using spring-boot, jersey, gwt.
+Example application using Spring-Boot 2.0.0, Jersey, & GWT 2.8.2.
 
 ## Quick Start
 
