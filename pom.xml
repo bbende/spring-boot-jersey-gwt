@@ -19,47 +19,38 @@ language governing permissions and limitations under the License. -->
     <packaging>jar</packaging>
 
     <properties>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
-        <target.jdk>${java.version}</target.jdk>
-        <spring.boot.version>2.0.0.RELEASE</spring.boot.version>
-        <gwt.version>2.8.2</gwt.version>
-        <gwt.resty.version>2.2.0</gwt.resty.version>
-        <gwt.material.version>2.0.1</gwt.material.version>
+        <!-- project / plugin related properties -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <server.port>8080</server.port>
+
+        <!-- dependency versions -->
+        <gwt.version>2.8.2</gwt.version>
+        <elemento.version>0.8.1</elemento.version>
+        <spring.boot.version>2.0.1.RELEASE</spring.boot.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
+    <!--
     <repositories>
         <repository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/snapshot</url>
-            <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <url>http://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
-            <id>webjars</id>
-            <url>http://webjars.github.com/m2</url>
+            <id>vertispan-snapshots</id>
+            <name>Vertispan Snapshots</name>
+            <url>https://repo.vertispan.com/gwt-snapshot/</url>
         </repository>
     </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/snapshot</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <url>http://repo.spring.io/milestone</url>
-        </pluginRepository>
-    </pluginRepositories>
-
+-->
     <dependencies>
-        <!-- Spring Boot Dependencies -->
+        <!-- Client Dependencies -->
+        <dependency>
+            <groupId>org.jboss.gwt.elemento</groupId>
+            <artifactId>elemento-core</artifactId>
+            <version>${elemento.version}</version>
+        </dependency>
+
+        <!-- Server Dependencies -->
 	    <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -91,48 +82,16 @@ language governing permissions and limitations under the License. -->
             <version>${spring.boot.version}</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.0</version>
-        </dependency>
         <!-- GWT Depends on validation-api 1.0.0, but spring-boot depends on 2.0.0 -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>2.0.0.Final</version>
         </dependency>
-        <!-- GWT Dependencies -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <version>${gwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.fusesource.restygwt</groupId>
-            <artifactId>restygwt</artifactId>
-            <version>${gwt.resty.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.gwtmaterialdesign</groupId>
-            <artifactId>gwt-material</artifactId>
-            <version>${gwt.material.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.gwt</groupId>
-                    <artifactId>gwt-dev</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.github.gwtmaterialdesign</groupId>
-            <artifactId>gwt-material-themes</artifactId>
-            <version>${gwt.material.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.gwtmaterialdesign</groupId>
-            <artifactId>gwt-material-addins</artifactId>
-            <version>${gwt.material.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <!-- Test Dependencies -->
         <dependency>
@@ -144,19 +103,7 @@ language governing permissions and limitations under the License. -->
     </dependencies>
 
     <build>
-        <outputDirectory>${project.build.directory}/classes</outputDirectory>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
-                <configuration>
-                    <source>${target.jdk}</source>
-                    <target>${target.jdk}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -173,7 +120,6 @@ language governing permissions and limitations under the License. -->
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -187,6 +133,7 @@ language governing permissions and limitations under the License. -->
                 </executions>
                 <configuration>
                     <runTarget>index.html</runTarget>
+                    <generateJsInteropExports>true</generateJsInteropExports>
                     <persistentunitcachedir>${project.build.directory}</persistentunitcachedir>
                     <deploy>${project.build.directory}/gwt-deploy</deploy>
                     <webappDirectory>${project.build.directory}/classes/static</webappDirectory>

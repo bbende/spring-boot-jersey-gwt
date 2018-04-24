@@ -45,7 +45,7 @@ public class NotesSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .antMatchers("/login", "/css/**", "/js/**").permitAll()
-            .antMatchers("/**").authenticated()
+            //.antMatchers("/**").authenticated()
         .and()
             .formLogin()
             .loginPage("/login")
