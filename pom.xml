@@ -28,26 +28,35 @@ language governing permissions and limitations under the License. -->
 
         <!-- dependency versions -->
         <gwt.version>2.8.2</gwt.version>
+        <gwt.event.version>HEAD-SNAPSHOT</gwt.event.version>
+        <gwt.window.version>HEAD-SNAPSHOT</gwt.window.version>
+        <gwt.history.version>HEAD-SNAPSHOT</gwt.history.version>
         <elemento.version>0.8.1</elemento.version>
         <spring.boot.version>2.0.1.RELEASE</spring.boot.version>
         <jackson.version>2.9.5</jackson.version>
     </properties>
 
-    <!--
-    <repositories>
-        <repository>
-            <id>vertispan-snapshots</id>
-            <name>Vertispan Snapshots</name>
-            <url>https://repo.vertispan.com/gwt-snapshot/</url>
-        </repository>
-    </repositories>
--->
     <dependencies>
         <!-- Client Dependencies -->
         <dependency>
             <groupId>org.jboss.gwt.elemento</groupId>
             <artifactId>elemento-core</artifactId>
             <version>${elemento.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.event</groupId>
+            <artifactId>gwt-event</artifactId>
+            <version>${gwt.event.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.user.window</groupId>
+            <artifactId>gwt-window</artifactId>
+            <version>${gwt.window.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.user.history</groupId>
+            <artifactId>gwt-history</artifactId>
+            <version>${gwt.history.version}</version>
         </dependency>
 
         <!-- Server Dependencies -->
@@ -144,5 +153,14 @@ language governing permissions and limitations under the License. -->
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <!-- Needed for snapshot builds of org.gwtprojects ported from gwt-user -->
+        <repository>
+            <id>vertispan-snapshots</id>
+            <name>Vertispan Snapshots</name>
+            <url>https://repo.vertispan.com/gwt-snapshot/</url>
+        </repository>
+    </repositories>
 
 </project>

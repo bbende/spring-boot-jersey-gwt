@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to="notes">
-    <inherits name="com.google.gwt.core.Core" />
+    <!-- Change this com.google.gwt.core.Core once elemento 0.8.2 is available -->
+    <inherits name="com.google.gwt.user.User"/>
+
     <inherits name="org.jboss.gwt.elemento.Core"/>
+    <inherits name="org.gwtproject.event.logical.LogicalEvent"/>
+    <inherits name="org.gwtproject.user.window.Window"/>
+    <inherits name="org.gwtproject.user.history.History"/>
 
     <entry-point class="com.bbende.notes.client.App"/>
 
