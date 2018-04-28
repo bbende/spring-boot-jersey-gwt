@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor
+license agreements. See the NOTICE file distributed with this work for additional
+information regarding copyright ownership. The ASF licenses this file to
+You under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of
+the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required
+by applicable law or agreed to in writing, software distributed under the
+License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+OF ANY KIND, either express or implied. See the License for the specific
+language governing permissions and limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.bbende.gwt.notes</groupId>
+        <artifactId>notes</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>notes-client</artifactId>
+    <packaging>gwt-app</packaging>
+
+    <properties>
+        <gwt.public.directory>src/main/resources/public</gwt.public.directory>
+        <module.name>com.bbende.notes.Client</module.name>
+        <module.shortName>client</module.shortName>
+    </properties>
+
+    <dependencies>
+        <!-- Client Dependencies -->
+        <dependency>
+            <groupId>org.jboss.gwt.elemento</groupId>
+            <artifactId>elemento-core</artifactId>
+            <version>${elemento.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.event</groupId>
+            <artifactId>gwt-event</artifactId>
+            <version>${gwt.event.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.user.window</groupId>
+            <artifactId>gwt-window</artifactId>
+            <version>${gwt.window.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.gwtproject.user.history</groupId>
+            <artifactId>gwt-history</artifactId>
+            <version>${gwt.history.version}</version>
+        </dependency>
+        <!-- Shared Dependencies -->
+        <dependency>
+            <groupId>com.bbende.gwt.notes</groupId>
+            <artifactId>notes-shared</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.gwt</groupId>
+                    <artifactId>gwt-dev</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Needed for gwt plugin to execute -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/node/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>net.ltgt.gwt.maven</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <configuration>
+                    <devmodeArgs>
+                        <devmodeArg>-noserver</devmodeArg>
+                        <devmodeArg>-port</devmodeArg>
+                        <devmodeArg>${server.port}</devmodeArg>
+                        <devmodeArg>-startupUrl</devmodeArg>
+                        <devmodeArg>index.html</devmodeArg>
+                    </devmodeArgs>
+                    <logLevel>INFO</logLevel>
+                    <moduleName>${module.name}</moduleName>
+                    <moduleShortName>${module.shortName}</moduleShortName>
+                    <startupUrls>
+                        <startupUrl>index.html</startupUrl>
+                    </startupUrls>
+                    <sourceLevel>1.8</sourceLevel>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${gwt.public.directory}</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

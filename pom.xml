@@ -13,15 +13,17 @@ language governing permissions and limitations under the License. -->
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-jersey-gwt</artifactId>
+    <groupId>com.bbende.gwt.notes</groupId>
+    <artifactId>notes</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <properties>
         <!-- project / plugin related properties -->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <plugin.version.gwt.maven>1.0-rc-9</plugin.version.gwt.maven>
+        <plugin.version.maven.resources>3.0.2</plugin.version.maven.resources>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <server.port>8080</server.port>
@@ -36,122 +38,27 @@ language governing permissions and limitations under the License. -->
         <jackson.version>2.9.5</jackson.version>
     </properties>
 
-    <dependencies>
-        <!-- Client Dependencies -->
-        <dependency>
-            <groupId>org.jboss.gwt.elemento</groupId>
-            <artifactId>elemento-core</artifactId>
-            <version>${elemento.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.gwtproject.event</groupId>
-            <artifactId>gwt-event</artifactId>
-            <version>${gwt.event.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.gwtproject.user.window</groupId>
-            <artifactId>gwt-window</artifactId>
-            <version>${gwt.window.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.gwtproject.user.history</groupId>
-            <artifactId>gwt-history</artifactId>
-            <version>${gwt.history.version}</version>
-        </dependency>
-
-        <!-- Server Dependencies -->
-	    <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>${spring.boot.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <!-- GWT Depends on validation-api 1.0.0, but spring-boot depends on 2.0.0 -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
-        </dependency>
-        <!-- Test Dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring.boot.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+      <module>notes-shared</module>
+      <module>notes-server</module>
+      <module>notes-client</module>
+    </modules>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
-                <configuration>
-                    <jvmArguments>-Dserver.port=${server.port}</jvmArguments>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwt.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <runTarget>index.html</runTarget>
-                    <generateJsInteropExports>true</generateJsInteropExports>
-                    <persistentunitcachedir>${project.build.directory}</persistentunitcachedir>
-                    <deploy>${project.build.directory}/gwt-deploy</deploy>
-                    <webappDirectory>${project.build.directory}/classes/static</webappDirectory>
-                    <hostedWebapp>${project.build.directory}/classes/static</hostedWebapp>
-                    <noServer>true</noServer>
-                    <port>${server.port}</port>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.ltgt.gwt.maven</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <version>${plugin.version.gwt.maven}</version>
+                    <extensions>true</extensions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${plugin.version.maven.resources}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <repositories>

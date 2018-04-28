@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to="notes">
+<module>
     <!-- Change this com.google.gwt.core.Core once elemento 0.8.2 is available -->
     <inherits name="com.google.gwt.user.User"/>
 
@@ -8,8 +8,10 @@
     <inherits name="org.gwtproject.user.window.Window"/>
     <inherits name="org.gwtproject.user.history.History"/>
 
+    <inherits name="com.bbende.notes.Shared" />
+
     <entry-point class="com.bbende.notes.client.App"/>
 
     <source path="client"/>
-    <source path="shared" />
+
 </module>

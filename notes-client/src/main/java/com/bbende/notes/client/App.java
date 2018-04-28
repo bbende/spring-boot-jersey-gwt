@@ -21,6 +21,7 @@ import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;
 import elemental2.dom.HTMLParagraphElement;
+import org.gwtproject.user.history.client.History;
 import org.jboss.gwt.elemento.core.Elements;
 
 import static org.jboss.gwt.elemento.core.Elements.*;
@@ -33,11 +34,6 @@ import static org.jboss.gwt.elemento.core.Elements.*;
 public class App implements EntryPoint {
 
     public void onModuleLoad() {
-//        HTMLParagraphElement p = (HTMLParagraphElement) DomGlobal.document.createElement("p");
-//        p.textContent = "Welcome!";
-//
-//        DomGlobal.document.body.appendChild(p);
-
         HTMLDivElement contentContainer = div().asElement();
 
         Elements.body()
@@ -45,6 +41,7 @@ public class App implements EntryPoint {
                 .add(contentContainer);
 
         AppController appController = new AppController(contentContainer);
+        History.fireCurrentHistoryState();
     }
 
 }
