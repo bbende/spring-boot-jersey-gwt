@@ -26,9 +26,10 @@
     <packaging>gwt-app</packaging>
 
     <properties>
-        <module.name>com.bbende.notes.Client</module.name>
-        <module.shortName>client</module.shortName>
-        <gwt.public.directory>src/main/resources/public</gwt.public.directory>
+        <module.name>com.bbende.notes.Notes</module.name>
+        <module.shortName>notes</module.shortName>
+        <src.dir>src/main/resources/public</src.dir>
+        <dist.dir>${project.build.directory}/${project.build.finalName}</dist.dir>
     </properties>
 
     <dependencies>
@@ -74,6 +75,42 @@
 
     <build>
         <plugins>
+            <!-- Install frontend dependencies and run gulp to pack css & js -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gulp</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>default --envName ${env.name} --srcDir ${src.dir} --outDir ${dist.dir} </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Build the GWT application -->
             <plugin>
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -87,28 +124,6 @@
                     <moduleShortName>${module.shortName}</moduleShortName>
                     <sourceLevel>1.8</sourceLevel>
                 </configuration>
-            </plugin>
-            <!-- Copies the contents of the src/main/resources/public to correct location in target -->
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${gwt.public.directory}</directory>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
