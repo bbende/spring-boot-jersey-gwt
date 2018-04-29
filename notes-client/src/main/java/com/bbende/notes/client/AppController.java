@@ -21,6 +21,9 @@ import org.jboss.gwt.elemento.core.Elements;
 
 public class AppController implements ValueChangeHandler<String> {
 
+    public static final String TOKEN_LIST = "list";
+    public static final String TOKEN_ADD = "add";
+
     private HTMLElement container;
 
     public void bind(HTMLElement container) {
@@ -34,17 +37,17 @@ public class AppController implements ValueChangeHandler<String> {
         String token = event.getValue();
 
         if ((token != null) && (!token.equals(""))) {
-            if (token.startsWith("LIST")) {
+            if (token.startsWith(TOKEN_LIST)) {
                 doList();
-            } else if (token.contains("ADD")) {
+            } else if (token.contains(TOKEN_ADD)) {
                 doAdd();
             }
         } else {
-            doWelcome();
+            doHome();
         }
     }
 
-    private void doWelcome() {
+    private void doHome() {
         Elements.removeChildrenFrom(container);
         container.appendChild(Elements.p().textContent("WELCOME").asElement());
     }

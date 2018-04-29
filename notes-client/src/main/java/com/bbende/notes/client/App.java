@@ -14,11 +14,8 @@
 package com.bbende.notes.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import elemental2.dom.DomGlobal;
 import elemental2.dom.HTMLDivElement;
-import org.jboss.gwt.elemento.core.Elements;
-
-import static org.jboss.gwt.elemento.core.Elements.div;
-import static org.jboss.gwt.elemento.core.Elements.p;
 
 /**
  * Main GWT Entry Point.
@@ -28,11 +25,9 @@ import static org.jboss.gwt.elemento.core.Elements.p;
 public class App implements EntryPoint {
 
     public void onModuleLoad() {
-        HTMLDivElement contentContainer = div().asElement();
 
-        Elements.body()
-                .add(p().textContent("BODY"))
-                .add(contentContainer);
+        HTMLDivElement contentContainer = (HTMLDivElement)
+                DomGlobal.document.getElementById("content-container");
 
         AppController appController = new AppController();
         appController.bind(contentContainer);
