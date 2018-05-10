@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "bootstrap-material-design": "^4.1.1"
   },
   "devDependencies": {
@@ -8,6 +9,8 @@
     "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
     "gulp-if": "^2.0.2",
-    "gulp-minify": "^2.1.0"
+    "gulp-minify": "^2.1.0",
+    "gulp-sass": "^4.0.1",
+    "node-sass-tilde-importer": "^1.0.2"
   }
 }

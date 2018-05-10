@@ -1,0 +1,12 @@
+// Customizations
+
+$indigo: #3f51b5;
+
+$theme-colors: (
+        primary: $indigo
+);
+
+// Bootstrap and its default variables
+@import "bootstrap-material-design/scss/bootstrap-material-design";
+
+
