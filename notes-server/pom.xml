@@ -25,6 +25,12 @@
     <artifactId>notes-server</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <webapp.src.dir>src/main/webapp</webapp.src.dir>
+        <webapp.build.dir>${project.build.directory}/frontend</webapp.build.dir>
+        <webapp.dist.dir>${project.build.directory}/classes/static</webapp.dist.dir>
+    </properties>
+
     <dependencies>
         <!-- Client Dependency will be unpacked to target/classes/static, exclude all transitive dependencies b/c
                 we don't want any client side related jars include in the full application jar -->
@@ -100,6 +106,41 @@
 
     <build>
         <plugins>
+            <!-- Install frontend dependencies and run gulp to pack css & js -->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-node-and-npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>${node.version}</nodeVersion>
+                            <npmVersion>${npm.version}</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>gulp</id>
+                        <goals>
+                            <goal>gulp</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>default --envName ${env.name} --srcDir ${webapp.src.dir} --buildDir ${webapp.build.dir} --outDir ${webapp.dist.dir} </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Unpack notes-client to target/classes/static so compiled GWT app ends up in final JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -116,8 +157,8 @@
                             <includeArtifactIds>notes-client</includeArtifactIds>
                             <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
                             <excludes>META-INF/**</excludes>
-                            <overWriteReleases>true</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
                         </configuration>
                     </execution>
                 </executions>
