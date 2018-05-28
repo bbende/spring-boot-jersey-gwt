@@ -13,6 +13,8 @@
  */
 package com.bbende.notes.client;
 
+import com.bbende.notes.client.layout.Layout;
+import com.bbende.notes.client.layout.Nav;
 import elemental2.dom.HTMLElement;
 import org.gwtproject.event.logical.shared.ValueChangeEvent;
 import org.gwtproject.event.logical.shared.ValueChangeHandler;
@@ -24,10 +26,12 @@ public class AppController implements ValueChangeHandler<String> {
     public static final String TOKEN_LIST = "list";
     public static final String TOKEN_ADD = "add";
 
+    private Nav navElement;
     private HTMLElement container;
 
-    public void bind(HTMLElement container) {
-        this.container = container;
+    public void bind(Layout layout) {
+        this.navElement = layout.getNavElement();
+        this.container = layout.getContentElement();
         History.addValueChangeHandler(this);
         History.fireCurrentHistoryState();
     }
@@ -48,16 +52,19 @@ public class AppController implements ValueChangeHandler<String> {
     }
 
     private void doHome() {
+        navElement.onHistoryChange("");
         Elements.removeChildrenFrom(container);
         container.appendChild(Elements.p().textContent("WELCOME").asElement());
     }
 
     private void doList() {
+        navElement.onHistoryChange("list");
         Elements.removeChildrenFrom(container);
         container.appendChild(Elements.p().textContent("LIST").asElement());
     }
 
     private void doAdd() {
+        navElement.onHistoryChange("add");
         Elements.removeChildrenFrom(container);
         container.appendChild(Elements.p().textContent("ADD").asElement());
     }

@@ -13,9 +13,10 @@
  */
 package com.bbende.notes.client;
 
+import com.bbende.notes.client.layout.impl.BootstrapLayout;
+import com.bbende.notes.client.layout.Layout;
 import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLDivElement;
 
 /**
  * Main GWT Entry Point.
@@ -25,12 +26,13 @@ import elemental2.dom.HTMLDivElement;
 public class App implements EntryPoint {
 
     public void onModuleLoad() {
+        // Create the layout and set it into the body of the document
+        Layout layout = new BootstrapLayout();
+        DomGlobal.document.body = layout.asElement();
 
-        HTMLDivElement contentContainer = (HTMLDivElement)
-                DomGlobal.document.getElementById("content-container");
-
+        // Create the app controller and bind it to the content element of the layout
         AppController appController = new AppController();
-        appController.bind(contentContainer);
+        appController.bind(layout);
     }
 
 }
