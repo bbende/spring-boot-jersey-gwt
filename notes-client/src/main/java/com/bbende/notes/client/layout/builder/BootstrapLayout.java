@@ -12,16 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.impl;
+package com.bbende.notes.client.layout.builder;
 
 import com.bbende.notes.client.layout.Layout;
 import com.bbende.notes.client.layout.Nav;
-import elemental2.dom.HTMLBodyElement;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;
+import org.jboss.gwt.elemento.core.Elements;
 
-import static org.jboss.gwt.elemento.core.Elements.*;
-import static com.bbende.notes.client.util.Roles.*;
+import static com.bbende.notes.client.util.Roles.ROLE_ATTR;
+import static com.bbende.notes.client.util.Roles.ROLE_MAIN;
+import static org.jboss.gwt.elemento.core.Elements.div;
+import static org.jboss.gwt.elemento.core.Elements.htmlElement;
 
 /**
  * Dashboard layout from bootstrap-material examples.
@@ -33,7 +35,7 @@ public class BootstrapLayout implements Layout {
     private Nav navElement;
     private HTMLElement mainElement;
     private HTMLDivElement contentElement;
-    private HTMLBodyElement bodyElement;
+    private HTMLDivElement containerElement;
 
     public BootstrapLayout() {
         mainElement = htmlElement(MAIN_TAG, HTMLElement.class)
@@ -41,7 +43,7 @@ public class BootstrapLayout implements Layout {
                 .add(div().add(contentElement = div().asElement()))
                 .asElement();
 
-        bodyElement = body()
+        containerElement = Elements.div()
                 .add(navElement = new BootstrapNav(mainElement))
                 .add(mainElement)
                 .asElement();
@@ -58,8 +60,8 @@ public class BootstrapLayout implements Layout {
     }
 
     @Override
-    public HTMLBodyElement asElement() {
-        return bodyElement;
+    public HTMLDivElement asElement() {
+        return containerElement;
     }
 
 }

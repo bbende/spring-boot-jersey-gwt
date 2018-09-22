@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.impl;
+package com.bbende.notes.client.layout.builder;
 
 import com.bbende.notes.client.layout.Nav;
 import com.bbende.notes.client.layout.NavLink;

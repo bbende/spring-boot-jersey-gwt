@@ -13,10 +13,11 @@
   ~ limitations under the License.
   -->
 <module>
-    <!-- Change this com.google.gwt.core.Core once elemento 0.8.2 is available -->
+    <!-- Needed to extend from EntryPoint, don't use anything else in com.google.gwt -->
     <inherits name="com.google.gwt.user.User"/>
 
     <inherits name="org.jboss.gwt.elemento.Core"/>
+    <inherits name="org.jboss.gwt.elemento.Template"/>
     <inherits name="org.gwtproject.event.logical.LogicalEvent"/>
     <inherits name="org.gwtproject.user.window.Window"/>
     <inherits name="org.gwtproject.user.history.History"/>

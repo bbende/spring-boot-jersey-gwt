@@ -31,23 +31,36 @@
     </properties>
 
     <dependencies>
+        <!-- Needed for extending EntryPoint, don't use anything else in com.google.gwt -->
         <dependency>
-            <groupId>com.bbende.gwt.notes</groupId>
-            <artifactId>notes-shared</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>gwt-lib</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.gwt</groupId>
-                    <artifactId>gwt-dev</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
         </dependency>
+        <!-- Needed for gwt-maven-plugin to execute -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+        <!-- elemento dependencies -->
         <dependency>
             <groupId>org.jboss.gwt.elemento</groupId>
             <artifactId>elemento-core</artifactId>
             <version>${elemento.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.gwt.elemento</groupId>
+            <artifactId>elemento-template-api</artifactId>
+            <version>${elemento.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.gwt.elemento</groupId>
+            <artifactId>elemento-template-processor</artifactId>
+            <version>${elemento.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- gwt-project dependencies -->
         <dependency>
             <groupId>org.gwtproject.event</groupId>
             <artifactId>gwt-event</artifactId>
@@ -63,22 +76,47 @@
             <artifactId>gwt-history</artifactId>
             <version>${gwt.history.version}</version>
         </dependency>
-        <!-- Needed for gwt-maven-plugin to execute -->
+        <!-- shared data model between client and server -->
         <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <version>${gwt.version}</version>
+            <groupId>com.bbende.gwt.notes</groupId>
+            <artifactId>notes-shared</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>gwt-lib</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.gwt</groupId>
+                    <artifactId>gwt-dev</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <!-- Find html templates located in src/main/java -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>
+                        **/*.html
+                    </include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Build the GWT application -->
             <plugin>
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <configuration>
+                    <compilerArgs>
+                        <compilerArg>-generateJsInteropExports</compilerArg>
+                    </compilerArgs>
+                    <codeserverArgs>
+                        <codeserverArg>-generateJsInteropExports</codeserverArg>
+                    </codeserverArgs>
                     <devmodeArgs>
+                        <devmodeArg>-generateJsInteropExports</devmodeArg>
                         <devmodeArg>-startupUrl</devmodeArg>
                         <devmodeArg>index.html</devmodeArg>
                     </devmodeArgs>
@@ -87,6 +125,26 @@
                     <moduleShortName>${module.shortName}</moduleShortName>
                     <sourceLevel>1.8</sourceLevel>
                 </configuration>
+            </plugin>
+            <!-- Adds generated sources from annotation processors as sources -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/annotations</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

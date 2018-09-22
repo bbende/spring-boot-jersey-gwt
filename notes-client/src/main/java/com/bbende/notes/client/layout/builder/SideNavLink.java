@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.impl;
+package com.bbende.notes.client.layout.builder;
 
 import com.bbende.notes.client.layout.NavLink;
 import elemental2.dom.HTMLAnchorElement;
@@ -23,10 +23,12 @@ import static org.jboss.gwt.elemento.core.Elements.a;
 
 public class SideNavLink implements NavLink {
 
+    private String label;
     private String urlToken;
     private HTMLAnchorElement anchorElement;
 
     public SideNavLink(String label, String urlToken) {
+        this.label = label;
         this.anchorElement = a(urlToken)
                 .css(NAVBAR_SIDE_LINK)
                 .textContent(label)
@@ -38,6 +40,11 @@ public class SideNavLink implements NavLink {
     @Override
     public HTMLAnchorElement asElement() {
         return anchorElement;
+    }
+
+    @Override
+    public String getLabel() {
+        return label;
     }
 
     @Override

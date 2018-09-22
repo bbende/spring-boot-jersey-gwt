@@ -12,34 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout;
+package com.bbende.notes.client.layout.template;
 
+import elemental2.dom.HTMLAnchorElement;
 import elemental2.dom.HTMLElement;
 import org.jboss.gwt.elemento.core.IsElement;
+import org.jboss.gwt.elemento.template.DataElement;
+import org.jboss.gwt.elemento.template.Templated;
 
-/**
- * A link in the Nav element.
- */
-public interface NavLink extends IsElement<HTMLElement> {
+@Templated
+public abstract class TopNavLink implements IsElement<HTMLElement> {
 
-    /**
-     * @return the text for the nav link
-     */
-    String getLabel();
+    public static TopNavLink create(String text, String href) {
+        return new Templated_TopNavLink(text, href);
+    }
 
-    /**
-     * @return the url token this link is for (excluding #)
-     */
-    String getUrlToken();
+    public abstract String getText();
 
-    /**
-     * Adds the active css class to this link.
-     */
-    void activate();
+    public abstract String getHref();
 
-    /**
-     * Removes the active css class from this link.
-     */
-    void deactivate();
+    @DataElement
+    HTMLAnchorElement anchorElement;
+
+    public HTMLAnchorElement getAnchorElement() {
+        return this.anchorElement;
+    }
 
 }
