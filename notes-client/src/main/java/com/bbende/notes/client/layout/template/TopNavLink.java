@@ -15,13 +15,13 @@
 package com.bbende.notes.client.layout.template;
 
 import elemental2.dom.HTMLAnchorElement;
-import elemental2.dom.HTMLElement;
+import elemental2.dom.HTMLLIElement;
 import org.jboss.gwt.elemento.core.IsElement;
 import org.jboss.gwt.elemento.template.DataElement;
 import org.jboss.gwt.elemento.template.Templated;
 
 @Templated
-public abstract class TopNavLink implements IsElement<HTMLElement> {
+public abstract class TopNavLink implements IsElement<HTMLLIElement> {
 
     public static TopNavLink create(String text, String href) {
         return new Templated_TopNavLink(text, href);

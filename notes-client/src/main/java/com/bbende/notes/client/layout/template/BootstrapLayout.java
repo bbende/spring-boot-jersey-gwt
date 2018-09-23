@@ -17,7 +17,10 @@ package com.bbende.notes.client.layout.template;
 import com.bbende.notes.client.layout.Layout;
 import com.bbende.notes.client.layout.Nav;
 import com.bbende.notes.client.layout.NavLink;
-import elemental2.dom.*;
+import elemental2.dom.HTMLButtonElement;
+import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLElement;
+import elemental2.dom.HTMLUListElement;
 import org.jboss.gwt.elemento.template.DataElement;
 import org.jboss.gwt.elemento.template.Templated;
 
@@ -26,15 +29,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.bbende.notes.client.util.BootstrapStyles.NAV_ITEM;
-import static com.bbende.notes.client.util.BootstrapStyles.NAV_LINK;
-import static com.bbende.notes.client.util.CustomStyles.*;
-import static org.jboss.gwt.elemento.core.Elements.a;
-import static org.jboss.gwt.elemento.core.Elements.li;
+import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_REVEAL;
+import static com.bbende.notes.client.util.CustomStyles.PUSH_MAIN;
 import static org.jboss.gwt.elemento.core.EventType.bind;
 import static org.jboss.gwt.elemento.core.EventType.click;
 
-@Templated("BootstrapLayout.html#container")
+@Templated
 public abstract class BootstrapLayout implements Layout, Nav {
 
     public static BootstrapLayout create() {

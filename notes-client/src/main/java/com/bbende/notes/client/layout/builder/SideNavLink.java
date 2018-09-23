@@ -16,12 +16,13 @@ package com.bbende.notes.client.layout.builder;
 
 import com.bbende.notes.client.layout.NavLink;
 import elemental2.dom.HTMLAnchorElement;
+import org.jboss.gwt.elemento.core.IsElement;
 
 import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_LINK;
 import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_LINK_ACTIVE;
 import static org.jboss.gwt.elemento.core.Elements.a;
 
-public class SideNavLink implements NavLink {
+public class SideNavLink implements NavLink<HTMLAnchorElement>, IsElement<HTMLAnchorElement> {
 
     private String label;
     private String urlToken;
@@ -43,7 +44,7 @@ public class SideNavLink implements NavLink {
     }
 
     @Override
-    public String getLabel() {
+    public String getText() {
         return label;
     }
 

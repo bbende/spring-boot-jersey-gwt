@@ -20,12 +20,12 @@ import org.jboss.gwt.elemento.core.IsElement;
 /**
  * A link in the Nav element.
  */
-public interface NavLink extends IsElement<HTMLElement> {
+public interface NavLink<T extends HTMLElement> extends IsElement<T> {
 
     /**
      * @return the text for the nav link
      */
-    String getLabel();
+    String getText();
 
     /**
      * @return the url token this link is for (excluding #)
