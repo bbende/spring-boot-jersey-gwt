@@ -24,7 +24,7 @@
 
     <inherits name="com.bbende.notes.Shared" />
 
-    <entry-point class="com.bbende.notes.client.App"/>
+    <entry-point class="com.bbende.notes.client.Application"/>
 
     <source path="client"/>
 

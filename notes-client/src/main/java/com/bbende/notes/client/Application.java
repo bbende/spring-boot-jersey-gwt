@@ -13,8 +13,8 @@
  */
 package com.bbende.notes.client;
 
-import com.bbende.notes.client.layout.Layout;
-import com.bbende.notes.client.layout.template.BootstrapLayout;
+import com.bbende.notes.client.ui.layout.Layout;
+import com.bbende.notes.client.ui.layout.template.BootstrapLayout;
 import com.google.gwt.core.client.EntryPoint;
 import org.jboss.gwt.elemento.core.Elements;
 
@@ -23,7 +23,7 @@ import org.jboss.gwt.elemento.core.Elements;
  *
  * @author bbende
  */
-public class App implements EntryPoint {
+public class Application implements EntryPoint {
 
     public void onModuleLoad() {
         // Create the layout and set it into the body of the document
@@ -32,8 +32,8 @@ public class App implements EntryPoint {
         Elements.body().add(layout);
 
         // Create the app controller and bind it to the content element of the layout
-        AppController appController = new AppController();
-        appController.bind(layout);
+        ApplicationController controller = new ApplicationController();
+        controller.bind(layout);
     }
 
 }

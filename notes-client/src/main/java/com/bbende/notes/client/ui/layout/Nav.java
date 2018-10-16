@@ -12,22 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.util;
+package com.bbende.notes.client.ui.layout;
 
-public interface BootstrapStyles {
+import elemental2.dom.HTMLElement;
+import org.jboss.gwt.elemento.core.IsElement;
 
-    String NAVBAR = "navbar";
-    String NAVBAR_DARK = "navbar-dark";
-    String NAVBAR_BRAND = "navbar-brand";
-    String NAVBAR_BRAND_LABEL = "navbar-brand-label";
-    String NAVBAR_TOGGLER = "navbar-toggler";
-    String NAVBAR_TOGGLER_ICON = "navbar-toggler-icon";
-    String NAVBAR_NAV = "navbar-nav";
-    String NAV_ITEM = "nav-item";
-    String NAV_LINK = "nav-link";
+/**
+ * Navigation element for the layout.
+ */
+public interface Nav extends IsElement<HTMLElement> {
 
-    String BG_DARK = "bg-dark";
-    String BG_PRIMARY = "bg-primary";
+    /**
+     * Notifies the Nav element about changes to the url token.
+     *
+     * @param urlToken the new url token
+     */
+    void onHistoryChange(String urlToken);
 
-    String FIXED_TOP = "fixed-top";
 }

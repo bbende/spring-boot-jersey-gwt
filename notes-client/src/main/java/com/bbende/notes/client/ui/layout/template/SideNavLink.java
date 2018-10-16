@@ -12,16 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.template;
+package com.bbende.notes.client.ui.layout.template;
 
-import com.bbende.notes.client.layout.NavLink;
+import com.bbende.notes.client.ui.layout.NavLink;
 import elemental2.dom.HTMLAnchorElement;
 import elemental2.dom.HTMLLIElement;
 import org.jboss.gwt.elemento.core.IsElement;
 import org.jboss.gwt.elemento.template.DataElement;
 import org.jboss.gwt.elemento.template.Templated;
 
-import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_LINK_ACTIVE;
+import static com.bbende.notes.client.ui.util.CustomStyles.NAVBAR_SIDE_LINK_ACTIVE;
 
 @Templated
 public abstract class SideNavLink implements NavLink<HTMLLIElement>, IsElement<HTMLLIElement> {

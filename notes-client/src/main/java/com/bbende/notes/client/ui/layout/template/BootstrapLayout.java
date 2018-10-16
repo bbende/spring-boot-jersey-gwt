@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.template;
+package com.bbende.notes.client.ui.layout.template;
 
-import com.bbende.notes.client.layout.Layout;
-import com.bbende.notes.client.layout.Nav;
-import com.bbende.notes.client.layout.NavLink;
+import com.bbende.notes.client.ui.layout.Layout;
+import com.bbende.notes.client.ui.layout.Nav;
+import com.bbende.notes.client.ui.layout.NavLink;
 import elemental2.dom.HTMLButtonElement;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;
@@ -29,8 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_REVEAL;
-import static com.bbende.notes.client.util.CustomStyles.PUSH_MAIN;
+import static com.bbende.notes.client.ui.util.CustomStyles.NAVBAR_SIDE_REVEAL;
+import static com.bbende.notes.client.ui.util.CustomStyles.PUSH_MAIN;
 import static org.jboss.gwt.elemento.core.EventType.bind;
 import static org.jboss.gwt.elemento.core.EventType.click;
 

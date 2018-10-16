@@ -1,4 +1,4 @@
-package com.bbende.notes.client.layout;
+package com.bbende.notes.client.ui.layout;
 
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;

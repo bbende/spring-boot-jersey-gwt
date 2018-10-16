@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.builder;
+package com.bbende.notes.client.ui.layout.builder;
 
-import com.bbende.notes.client.layout.NavLink;
+import com.bbende.notes.client.ui.layout.NavLink;
 import elemental2.dom.HTMLAnchorElement;
 import org.jboss.gwt.elemento.core.IsElement;
 
-import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_LINK;
-import static com.bbende.notes.client.util.CustomStyles.NAVBAR_SIDE_LINK_ACTIVE;
+import static com.bbende.notes.client.ui.util.CustomStyles.NAVBAR_SIDE_LINK;
+import static com.bbende.notes.client.ui.util.CustomStyles.NAVBAR_SIDE_LINK_ACTIVE;
 import static org.jboss.gwt.elemento.core.Elements.a;
 
 public class SideNavLink implements NavLink<HTMLAnchorElement>, IsElement<HTMLAnchorElement> {

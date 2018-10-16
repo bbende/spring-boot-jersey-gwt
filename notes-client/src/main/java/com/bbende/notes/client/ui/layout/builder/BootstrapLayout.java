@@ -12,16 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.builder;
+package com.bbende.notes.client.ui.layout.builder;
 
-import com.bbende.notes.client.layout.Layout;
-import com.bbende.notes.client.layout.Nav;
+import com.bbende.notes.client.ui.layout.Layout;
+import com.bbende.notes.client.ui.layout.Nav;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;
 import org.jboss.gwt.elemento.core.Elements;
 
-import static com.bbende.notes.client.util.Roles.ROLE_ATTR;
-import static com.bbende.notes.client.util.Roles.ROLE_MAIN;
+import static com.bbende.notes.client.ui.util.Roles.ROLE_ATTR;
+import static com.bbende.notes.client.ui.util.Roles.ROLE_MAIN;
 import static org.jboss.gwt.elemento.core.Elements.div;
 import static org.jboss.gwt.elemento.core.Elements.htmlElement;
 

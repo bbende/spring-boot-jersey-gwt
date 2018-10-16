@@ -12,12 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.util;
+package com.bbende.notes.client.mvp;
 
-public interface Roles {
 
-    String ROLE_ATTR = "role";
-    String ROLE_MAIN = "main";
-    String ROLE_NAVIGATION = "navigaton";
+import elemental2.dom.HTMLElement;
 
+public abstract class AbstractView<P extends Presenter, E extends HTMLElement>
+        implements View<P,E> {
+
+    protected P presenter;
+    protected final E element;
+
+    public AbstractView() {
+        this.element = createView();
+    }
+
+    protected abstract E createView();
+
+    @Override
+    public void setPresenter(final P presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public E asElement() {
+        return element;
+    }
 }

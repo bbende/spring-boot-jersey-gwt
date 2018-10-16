@@ -12,15 +12,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.util;
+package com.bbende.notes.client.ui.util;
 
-public interface CustomStyles {
+public interface BootstrapStyles {
 
-    String NAVBAR_SIDE = "navbar-side";
-    String NAVBAR_SIDE_ITEM = "navbar-side-item";
-    String NAVBAR_SIDE_LINK = "navbar-side-link";
-    String NAVBAR_SIDE_REVEAL = "navbar-side-reveal";
-    String NAVBAR_SIDE_LINK_ACTIVE = "active";
+    String NAVBAR = "navbar";
+    String NAVBAR_DARK = "navbar-dark";
+    String NAVBAR_BRAND = "navbar-brand";
+    String NAVBAR_BRAND_LABEL = "navbar-brand-label";
+    String NAVBAR_TOGGLER = "navbar-toggler";
+    String NAVBAR_TOGGLER_ICON = "navbar-toggler-icon";
+    String NAVBAR_NAV = "navbar-nav";
+    String NAV_ITEM = "nav-item";
+    String NAV_LINK = "nav-link";
 
-    String PUSH_MAIN = "push-main";
+    String BG_DARK = "bg-dark";
+    String BG_PRIMARY = "bg-primary";
+
+    String FIXED_TOP = "fixed-top";
 }

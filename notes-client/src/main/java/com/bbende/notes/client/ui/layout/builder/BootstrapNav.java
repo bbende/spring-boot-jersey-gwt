@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout.builder;
+package com.bbende.notes.client.ui.layout.builder;
 
-import com.bbende.notes.client.layout.Nav;
-import com.bbende.notes.client.layout.NavLink;
+import com.bbende.notes.client.ui.layout.Nav;
+import com.bbende.notes.client.ui.layout.NavLink;
 import elemental2.dom.HTMLAnchorElement;
 import elemental2.dom.HTMLButtonElement;
 import elemental2.dom.HTMLElement;
@@ -28,9 +28,9 @@ import java.util.Optional;
 import static org.jboss.gwt.elemento.core.Elements.*;
 import static org.jboss.gwt.elemento.core.EventType.bind;
 import static org.jboss.gwt.elemento.core.EventType.click;
-import static com.bbende.notes.client.util.BootstrapStyles.*;
-import static com.bbende.notes.client.util.CustomStyles.*;
-import static com.bbende.notes.client.util.Roles.*;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.*;
+import static com.bbende.notes.client.ui.util.CustomStyles.*;
+import static com.bbende.notes.client.ui.util.Roles.*;
 
 /**
  * Bootstrap implementation of the Nav element that contains a toggle-able side nav.

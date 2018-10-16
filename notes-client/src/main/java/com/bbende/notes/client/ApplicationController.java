@@ -13,15 +13,19 @@
  */
 package com.bbende.notes.client;
 
-import com.bbende.notes.client.layout.Layout;
-import com.bbende.notes.client.layout.Nav;
+import com.bbende.notes.client.ui.home.HomePresenter;
+import com.bbende.notes.client.ui.home.HomePresenterImpl;
+import com.bbende.notes.client.ui.home.HomeView;
+import com.bbende.notes.client.ui.home.HomeViewImpl;
+import com.bbende.notes.client.ui.layout.Layout;
+import com.bbende.notes.client.ui.layout.Nav;
 import elemental2.dom.HTMLElement;
 import org.gwtproject.event.logical.shared.ValueChangeEvent;
 import org.gwtproject.event.logical.shared.ValueChangeHandler;
 import org.gwtproject.user.history.client.History;
 import org.jboss.gwt.elemento.core.Elements;
 
-public class AppController implements ValueChangeHandler<String> {
+public class ApplicationController implements ValueChangeHandler<String> {
 
     public static final String TOKEN_LIST = "list";
     public static final String TOKEN_ADD = "add";
@@ -53,8 +57,12 @@ public class AppController implements ValueChangeHandler<String> {
 
     private void doHome() {
         navElement.onHistoryChange("");
-        Elements.removeChildrenFrom(container);
-        container.appendChild(Elements.p().textContent("WELCOME").asElement());
+
+        final HomeView view = new HomeViewImpl();
+        final String message = "Welcome to Notes!";
+
+        final HomePresenter presenter = new HomePresenterImpl(view, message);
+        presenter.go(container);
     }
 
     private void doList() {

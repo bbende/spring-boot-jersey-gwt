@@ -12,21 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.layout;
+package com.bbende.notes.client.mvp;
 
 import elemental2.dom.HTMLElement;
-import org.jboss.gwt.elemento.core.IsElement;
+import org.jboss.gwt.elemento.core.Elements;
 
-/**
- * Navigation element for the layout.
- */
-public interface Nav extends IsElement<HTMLElement> {
+public abstract class AbstractPresenter<V extends View> implements Presenter {
 
-    /**
-     * Notifies the Nav element about changes to the url token.
-     *
-     * @param urlToken the new url token
-     */
-    void onHistoryChange(String urlToken);
+    protected V view;
+
+    public AbstractPresenter(final V view) {
+        this.view = view;
+        this.view.setPresenter(this);
+    }
+
+    @Override
+    public void go(final HTMLElement container) {
+        Elements.removeChildrenFrom(container);
+        container.appendChild(view.asElement());
+    }
 
 }
