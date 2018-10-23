@@ -24,6 +24,8 @@ import static org.jboss.gwt.elemento.core.Elements.div;
 import static org.jboss.gwt.elemento.core.Elements.p;
 import static org.jboss.gwt.elemento.core.EventType.bind;
 import static org.jboss.gwt.elemento.core.EventType.click;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN_OUTLINE_PRIMARY;
 
 public class HomeViewImpl extends AbstractView<HomePresenter,HTMLDivElement> implements HomeView {
 
@@ -34,7 +36,10 @@ public class HomeViewImpl extends AbstractView<HomePresenter,HTMLDivElement> imp
     protected HTMLDivElement createView() {
         final HTMLDivElement divElement = div()
                 .add(messageParagraph = p().asElement())
-                .add(newMessageButton = button().textContent("New Message").asElement())
+                .add(newMessageButton = button()
+                        .css(BTN, BTN_OUTLINE_PRIMARY)
+                        .textContent("New Message")
+                        .asElement())
                 .asElement();
 
         bind(newMessageButton, click, event -> presenter.onNewMessageClicked());

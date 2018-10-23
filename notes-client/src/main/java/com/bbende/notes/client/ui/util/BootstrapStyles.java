@@ -30,4 +30,13 @@ public interface BootstrapStyles {
     String BG_PRIMARY = "bg-primary";
 
     String FIXED_TOP = "fixed-top";
+
+    String BTN = "btn";
+    String BTN_PRIMARY = "btn-primary";
+    String BTN_OUTLINE_PRIMARY = "btn-outline-primary";
+    String BTN_LINK = "btn-link";
+
+    String FORM_GROUP = "form-group";
+    String FORM_CONTROL = "form-control";
+
 }

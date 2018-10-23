@@ -11,6 +11,11 @@ From first terminal:
     
 From second terminal:
 
-    mvn gwt:run
+    mvn gwt:codeserver
+    
+From third terminal:
+
+    gulp watch --envName dev --srcDir src/main/webapp --buildDir target/frontend --outDir target/classes/static
+
     
 Open [http://localhost:8080/index.html](http://localhost:8080/index.html) in your browser.

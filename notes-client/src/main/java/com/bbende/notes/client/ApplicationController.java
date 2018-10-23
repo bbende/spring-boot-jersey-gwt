@@ -13,6 +13,10 @@
  */
 package com.bbende.notes.client;
 
+import com.bbende.notes.client.ui.add.AddNotePresenter;
+import com.bbende.notes.client.ui.add.AddNotePresenterImpl;
+import com.bbende.notes.client.ui.add.AddNoteView;
+import com.bbende.notes.client.ui.add.AddNoteViewImpl;
 import com.bbende.notes.client.ui.home.HomePresenter;
 import com.bbende.notes.client.ui.home.HomePresenterImpl;
 import com.bbende.notes.client.ui.home.HomeView;
@@ -73,8 +77,11 @@ public class ApplicationController implements ValueChangeHandler<String> {
 
     private void doAdd() {
         navElement.onHistoryChange("add");
-        Elements.removeChildrenFrom(container);
-        container.appendChild(Elements.p().textContent("ADD").asElement());
+
+        final AddNoteView view = new AddNoteViewImpl();
+
+        final AddNotePresenter presenter = new AddNotePresenterImpl(view);
+        presenter.go(container);
     }
 
 }
