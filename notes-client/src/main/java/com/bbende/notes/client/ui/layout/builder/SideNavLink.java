@@ -33,13 +33,13 @@ public class SideNavLink implements NavLink<HTMLAnchorElement>, IsElement<HTMLAn
         this.anchorElement = a(urlToken)
                 .css(NAVBAR_SIDE_LINK)
                 .textContent(label)
-                .asElement();
+                .get();
 
         this.urlToken = urlToken.startsWith("#") ? urlToken.replaceFirst("#", "") : urlToken;
     }
 
     @Override
-    public HTMLAnchorElement asElement() {
+    public HTMLAnchorElement element() {
         return anchorElement;
     }
 

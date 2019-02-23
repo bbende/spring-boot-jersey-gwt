@@ -68,7 +68,7 @@ public class BootstrapNav implements Nav {
                         .add(navbarSideToggleButton = button()
                                 .css(NAVBAR_TOGGLER)
                                 .add(span().css(NAVBAR_TOGGLER_ICON))
-                                .asElement())
+                                .get())
                         .add(a(HREF_EMPTY)
                                 .css(NAVBAR_BRAND, NAVBAR_BRAND_LABEL)
                                 .textContent(NAVBAR_BRAND_LABEL_TEXT))
@@ -78,16 +78,16 @@ public class BootstrapNav implements Nav {
                                 .add(navbarTopLinkSignOut = a(HREF_EMPTY)
                                         .css(NAV_LINK)
                                         .textContent("Sign Out")
-                                        .asElement()))
+                                        .get()))
                 )
                 .add(navbarSide = ul()
                         .css(NAVBAR_SIDE)
                         .add(li().css(NAVBAR_SIDE_ITEM).add(navbarSideLinkHome))
                         .add(li().css(NAVBAR_SIDE_ITEM).add(navbarSideLinkList))
                         .add(li().css(NAVBAR_SIDE_ITEM).add(navbarSideLinkAdd))
-                        .asElement()
+                        .get()
                 )
-                .asElement();
+                .get();
 
         bind(navbarSideToggleButton, click, event -> toggleSideNav());
         bind(navbarTopLinkSignOut, click, event -> signOut());
@@ -118,19 +118,17 @@ public class BootstrapNav implements Nav {
 
     @Override
     public void onHistoryChange(String urlToken) {
-        navbarSideLinks.stream().forEach(navLink -> navLink.deactivate());
+        navbarSideLinks.forEach(NavLink::deactivate);
 
         Optional<NavLink> matchingLink = navbarSideLinks.stream()
                 .filter(l -> l.getUrlToken().equals(urlToken))
                 .findFirst();
 
-        if (matchingLink.isPresent()) {
-            matchingLink.get().activate();
-        }
+        matchingLink.ifPresent(NavLink::activate);
     }
 
     @Override
-    public HTMLElement asElement() {
+    public HTMLElement element() {
         return navElement;
     }
 

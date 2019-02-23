@@ -29,7 +29,7 @@ public abstract class AbstractPresenter<V extends View> implements Presenter {
     @Override
     public void go(final HTMLElement container) {
         Elements.removeChildrenFrom(container);
-        container.appendChild(view.asElement());
+        container.appendChild(view.element());
     }
 
 }

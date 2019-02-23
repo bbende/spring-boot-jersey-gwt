@@ -35,7 +35,7 @@ public abstract class AbstractView<P extends Presenter, E extends HTMLElement>
     }
 
     @Override
-    public E asElement() {
+    public E element() {
         return element;
     }
 }

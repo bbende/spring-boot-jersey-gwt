@@ -35,12 +35,12 @@ public class HomeViewImpl extends AbstractView<HomePresenter,HTMLDivElement> imp
     @Override
     protected HTMLDivElement createView() {
         final HTMLDivElement divElement = div()
-                .add(messageParagraph = p().asElement())
+                .add(messageParagraph = p().get())
                 .add(newMessageButton = button()
                         .css(BTN, BTN_OUTLINE_PRIMARY)
                         .textContent("New Message")
-                        .asElement())
-                .asElement();
+                        .get())
+                .get();
 
         bind(newMessageButton, click, event -> presenter.onNewMessageClicked());
 

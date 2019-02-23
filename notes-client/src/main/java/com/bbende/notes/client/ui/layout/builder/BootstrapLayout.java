@@ -40,13 +40,13 @@ public class BootstrapLayout implements Layout {
     public BootstrapLayout() {
         mainElement = htmlElement(MAIN_TAG, HTMLElement.class)
                 .attr(ROLE_ATTR, ROLE_MAIN)
-                .add(div().add(contentElement = div().asElement()))
-                .asElement();
+                .add(div().add(contentElement = div().get()))
+                .get();
 
         containerElement = Elements.div()
                 .add(navElement = new BootstrapNav(mainElement))
                 .add(mainElement)
-                .asElement();
+                .get();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BootstrapLayout implements Layout {
     }
 
     @Override
-    public HTMLDivElement asElement() {
+    public HTMLDivElement element() {
         return containerElement;
     }
 

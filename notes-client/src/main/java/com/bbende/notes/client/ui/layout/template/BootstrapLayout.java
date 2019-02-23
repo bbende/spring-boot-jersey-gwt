@@ -67,13 +67,13 @@ public abstract class BootstrapLayout implements Layout, Nav {
                 navSideLinkList,
                 navSideLinkAdd);
 
-        navSide.appendChild(navSideLinkHome.asElement());
-        navSide.appendChild(navSideLinkList.asElement());
-        navSide.appendChild(navSideLinkAdd.asElement());
+        navSide.appendChild(navSideLinkHome.element());
+        navSide.appendChild(navSideLinkList.element());
+        navSide.appendChild(navSideLinkAdd.element());
 
         // Setup top nav links...
         navTopLinkSignOut = TopNavLink.create("Sign Out", "#");
-        navTop.appendChild(navTopLinkSignOut.asElement());
+        navTop.appendChild(navTopLinkSignOut.element());
 
         // Bind event handlers...
         bind(navToggle, click, event -> toggleSideNav());
@@ -111,15 +111,13 @@ public abstract class BootstrapLayout implements Layout, Nav {
 
     @Override
     public void onHistoryChange(String urlToken) {
-        navSideLinks.stream().forEach(navLink -> navLink.deactivate());
+        navSideLinks.forEach(NavLink::deactivate);
 
         Optional<NavLink> matchingLink = navSideLinks.stream()
                 .filter(l -> l.getUrlToken().equals(urlToken))
                 .findFirst();
 
-        if (matchingLink.isPresent()) {
-            matchingLink.get().activate();
-        }
+        matchingLink.ifPresent(NavLink::activate);
     }
 
 }

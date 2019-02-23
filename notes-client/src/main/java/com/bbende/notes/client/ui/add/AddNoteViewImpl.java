@@ -51,14 +51,14 @@ public class AddNoteViewImpl extends AbstractView<AddNotePresenter,HTMLDivElemen
                                         input.placeholder = PLACEHOLDER;
                                         input.autofocus = true;
                                     })
-                                    .asElement())
+                                    .get())
                         )
                         .add(addButton = button()
                                 .css(BTN, BTN_OUTLINE_PRIMARY)
                                 .textContent(ADD_NOTE_BUTTON_LABEL)
-                                .asElement())
+                                .get())
                 )
-                .asElement();
+                .get();
 
         bind(addButton, click, event -> presenter.onAddClicked());
 

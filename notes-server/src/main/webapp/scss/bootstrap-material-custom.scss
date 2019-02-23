@@ -47,7 +47,7 @@ body {
   transform: translateX(-100%);
   -webkit-transition: 300ms ease;
   transition: 300ms ease;
-  @include media-breakpoint-up(xs) { width: 75%; } // Small
+  @include media-breakpoint-up(xs) { width: 60%; } // Small
   @include media-breakpoint-up(sm) { width: 40%; } // Medium
   @include media-breakpoint-up(md) { width: 20%; } // Large
 }

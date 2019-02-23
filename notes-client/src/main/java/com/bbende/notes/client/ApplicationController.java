@@ -72,7 +72,7 @@ public class ApplicationController implements ValueChangeHandler<String> {
     private void doList() {
         navElement.onHistoryChange("list");
         Elements.removeChildrenFrom(container);
-        container.appendChild(Elements.p().textContent("LIST").asElement());
+        container.appendChild(Elements.p().textContent("LIST").get());
     }
 
     private void doAdd() {
