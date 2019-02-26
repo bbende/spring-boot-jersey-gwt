@@ -1,3 +1,4 @@
+
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,24 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.shared;
+package com.bbende.notes.client.service;
 
-import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-public class Note {
+@JsType(isNative = true, namespace = JsPackage.GLOBAL)
+public class JSON {
 
-    public int id;
-    public String text;
+    public static native String stringify(Object o);
 
-    @JsOverlay
-    public static Note create(int id, String text) {
-        Note note = new Note();
-        note.id = id;
-        note.text = text;
-        return note;
-    }
+    public static native <O> O parse(String json);
 
 }

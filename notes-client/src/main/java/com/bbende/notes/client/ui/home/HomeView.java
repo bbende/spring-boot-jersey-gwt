@@ -14,11 +14,45 @@
  */
 package com.bbende.notes.client.ui.home;
 
-import com.bbende.notes.client.mvp.View;
+import elemental2.dom.HTMLButtonElement;
 import elemental2.dom.HTMLDivElement;
+import elemental2.dom.HTMLParagraphElement;
 
-public interface HomeView extends View<HomePresenter,HTMLDivElement> {
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN_OUTLINE_PRIMARY;
+import static org.jboss.gwt.elemento.core.Elements.button;
+import static org.jboss.gwt.elemento.core.Elements.div;
+import static org.jboss.gwt.elemento.core.Elements.p;
 
-    void setMessage(String message);
+public class HomeView implements HomePresenter.View {
+
+    private HTMLDivElement element;
+    private HTMLParagraphElement messageParagraph;
+    private HTMLButtonElement newMessageButton;
+
+    public HomeView() {
+        element = div()
+                .add(messageParagraph = p().get())
+                .add(newMessageButton = button()
+                        .css(BTN, BTN_OUTLINE_PRIMARY)
+                        .textContent("New Message")
+                        .get())
+                .get();
+    }
+
+    @Override
+    public void setMessage(String message) {
+        messageParagraph.textContent = message;
+    }
+
+    @Override
+    public HTMLButtonElement getNewMessageButton() {
+        return newMessageButton;
+    }
+
+    @Override
+    public HTMLDivElement element() {
+        return element;
+    }
 
 }

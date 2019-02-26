@@ -14,15 +14,62 @@
  */
 package com.bbende.notes.client.ui.add;
 
-import com.bbende.notes.client.mvp.View;
 import elemental2.dom.HTMLButtonElement;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLInputElement;
+import org.jboss.gwt.elemento.core.InputType;
 
-public interface AddNoteView extends View<AddNotePresenter,HTMLDivElement> {
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.BTN_OUTLINE_PRIMARY;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.FORM_CONTROL;
+import static com.bbende.notes.client.ui.util.BootstrapStyles.FORM_GROUP;
+import static org.jboss.gwt.elemento.core.Elements.button;
+import static org.jboss.gwt.elemento.core.Elements.div;
+import static org.jboss.gwt.elemento.core.Elements.form;
+import static org.jboss.gwt.elemento.core.Elements.input;
 
-    HTMLInputElement getNoteText();
+public class AddNoteView implements AddNotePresenter.View {
 
-    HTMLButtonElement getAddButton();
+    private static final String PLACEHOLDER = "Note Text";
+    private static final String ADD_NOTE_BUTTON_LABEL = "Add";
+
+    private final HTMLDivElement element;
+    private final HTMLInputElement noteText;
+    private final HTMLButtonElement addButton;
+
+    public AddNoteView() {
+        this.element = div()
+                .add(form()
+                        .add(div().css(FORM_GROUP)
+                                .add(noteText = input(InputType.text)
+                                    .css(FORM_CONTROL)
+                                    .apply(input -> {
+                                        input.placeholder = PLACEHOLDER;
+                                        input.autofocus = true;
+                                    })
+                                    .get())
+                        )
+                        .add(addButton = button()
+                                .css(BTN, BTN_OUTLINE_PRIMARY)
+                                .textContent(ADD_NOTE_BUTTON_LABEL)
+                                .get())
+                )
+                .get();
+    }
+
+    @Override
+    public HTMLInputElement getNoteText() {
+        return noteText;
+    }
+
+    @Override
+    public HTMLButtonElement getAddNoteButton() {
+        return addButton;
+    }
+
+    @Override
+    public HTMLDivElement element() {
+        return element;
+    }
 
 }

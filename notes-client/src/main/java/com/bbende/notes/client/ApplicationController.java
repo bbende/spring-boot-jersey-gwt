@@ -13,21 +13,20 @@
  */
 package com.bbende.notes.client;
 
+import com.bbende.notes.client.mvp.Presenter;
+import com.bbende.notes.client.service.NoteService;
 import com.bbende.notes.client.ui.add.AddNotePresenter;
-import com.bbende.notes.client.ui.add.AddNotePresenterImpl;
 import com.bbende.notes.client.ui.add.AddNoteView;
-import com.bbende.notes.client.ui.add.AddNoteViewImpl;
 import com.bbende.notes.client.ui.home.HomePresenter;
-import com.bbende.notes.client.ui.home.HomePresenterImpl;
 import com.bbende.notes.client.ui.home.HomeView;
-import com.bbende.notes.client.ui.home.HomeViewImpl;
 import com.bbende.notes.client.ui.layout.Layout;
 import com.bbende.notes.client.ui.layout.Nav;
+import com.bbende.notes.client.ui.list.ListNotesPresenter;
+import com.bbende.notes.client.ui.list.ListNotesView;
 import elemental2.dom.HTMLElement;
 import org.gwtproject.event.logical.shared.ValueChangeEvent;
 import org.gwtproject.event.logical.shared.ValueChangeHandler;
 import org.gwtproject.user.history.client.History;
-import org.jboss.gwt.elemento.core.Elements;
 
 public class ApplicationController implements ValueChangeHandler<String> {
 
@@ -36,6 +35,9 @@ public class ApplicationController implements ValueChangeHandler<String> {
 
     private Nav navElement;
     private HTMLElement container;
+
+    // TODO should be injected from somewhere
+    private NoteService noteService = new NoteService();
 
     public void bind(Layout layout) {
         this.navElement = layout.getNavElement();
@@ -46,8 +48,7 @@ public class ApplicationController implements ValueChangeHandler<String> {
 
     @Override
     public void onValueChange(ValueChangeEvent<String> event) {
-        String token = event.getValue();
-
+        final String token = event.getValue();
         if ((token != null) && (!token.equals(""))) {
             if (token.startsWith(TOKEN_LIST)) {
                 doList();
@@ -61,26 +62,22 @@ public class ApplicationController implements ValueChangeHandler<String> {
 
     private void doHome() {
         navElement.onHistoryChange("");
-
-        final HomeView view = new HomeViewImpl();
-        final String message = "Welcome to Notes!";
-
-        final HomePresenter presenter = new HomePresenterImpl(view, message);
+        final HomePresenter.View view = new HomeView();
+        final Presenter presenter = new HomePresenter(view, "Welcome to Notes!");
         presenter.go(container);
     }
 
     private void doList() {
-        navElement.onHistoryChange("list");
-        Elements.removeChildrenFrom(container);
-        container.appendChild(Elements.p().textContent("LIST").get());
+        navElement.onHistoryChange(TOKEN_LIST);
+        final ListNotesPresenter.View view = new ListNotesView();
+        final Presenter presenter = new ListNotesPresenter(view, noteService);
+        presenter.go(container);
     }
 
     private void doAdd() {
-        navElement.onHistoryChange("add");
-
-        final AddNoteView view = new AddNoteViewImpl();
-
-        final AddNotePresenter presenter = new AddNotePresenterImpl(view);
+        navElement.onHistoryChange(TOKEN_ADD);
+        final AddNotePresenter.View view = new AddNoteView();
+        final Presenter presenter = new AddNotePresenter(view, noteService);
         presenter.go(container);
     }
 

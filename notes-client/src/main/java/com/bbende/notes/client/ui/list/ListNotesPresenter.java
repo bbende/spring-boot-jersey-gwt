@@ -12,64 +12,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bbende.notes.client.ui.add;
+package com.bbende.notes.client.ui.list;
 
-import com.bbende.notes.client.ApplicationController;
 import com.bbende.notes.client.mvp.Presenter;
 import com.bbende.notes.client.service.NoteService;
 import com.bbende.notes.client.service.ServiceCallback;
 import com.bbende.notes.shared.Note;
 import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLButtonElement;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.HTMLElement;
-import elemental2.dom.HTMLInputElement;
 import org.gwtproject.http.client.Request;
-import org.gwtproject.user.history.client.History;
 import org.jboss.gwt.elemento.core.Elements;
 import org.jboss.gwt.elemento.core.IsElement;
 
-import static org.jboss.gwt.elemento.core.EventType.bind;
-import static org.jboss.gwt.elemento.core.EventType.click;
+public class ListNotesPresenter implements Presenter {
 
-public class AddNotePresenter implements Presenter {
-
+    /**
+     * Contract between this presenter and view impls.
+     */
     public interface View extends IsElement<HTMLDivElement> {
-        HTMLInputElement getNoteText();
-        HTMLButtonElement getAddNoteButton();
+        void setNotes(Note[] notes);
     }
 
     private final View view;
     private final NoteService service;
 
-    public AddNotePresenter(final View view, final NoteService service) {
+    public ListNotesPresenter(final View view, final NoteService service) {
         this.view = view;
         this.service = service;
-
-        final HTMLButtonElement addNoteButton = this.view.getAddNoteButton();
-        bind(addNoteButton, click, event -> onAddClicked());
+        loadNotes();
     }
 
-    public void onAddClicked() {
-        final Note note = new Note();
-        note.text = view.getNoteText().value;
-
-        service.addNote(note, new ServiceCallback<Note>() {
+    private void loadNotes() {
+        service.getNotes(new ServiceCallback<Note[]>() {
             @Override
-            public void onSuccess(final Request request, final Note dto) {
-                History.newItem(ApplicationController.TOKEN_LIST);
-                History.fireCurrentHistoryState();
+            public void onSuccess(Request request, Note[] notes) {
+                view.setNotes(notes);
             }
 
             @Override
-            public void onError(final Request request, final Throwable exception) {
+            public void onError(Request request, Throwable exception) {
                 DomGlobal.alert("Error: " + exception.getMessage());
             }
         });
     }
 
     @Override
-    public void go(HTMLElement container) {
+    public void go(final HTMLElement container) {
         Elements.removeChildrenFrom(container);
         container.appendChild(view.element());
     }

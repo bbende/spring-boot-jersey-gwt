@@ -37,6 +37,7 @@
         <gwt.event.version>HEAD-SNAPSHOT</gwt.event.version>
         <gwt.window.version>HEAD-SNAPSHOT</gwt.window.version>
         <gwt.history.version>HEAD-SNAPSHOT</gwt.history.version>
+        <gwt.http.version>HEAD-SNAPSHOT</gwt.http.version>
         <elemento.version>0.9.0</elemento.version>
         <node.version>v9.5.0</node.version>
         <npm.version>5.6.0</npm.version>

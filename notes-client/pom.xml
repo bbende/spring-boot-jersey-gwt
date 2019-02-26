@@ -76,6 +76,11 @@
             <artifactId>gwt-history</artifactId>
             <version>${gwt.history.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.gwtproject.http</groupId>
+            <artifactId>gwt-http</artifactId>
+            <version>${gwt.http.version}</version>
+        </dependency>
         <!-- shared data model between client and server -->
         <dependency>
             <groupId>com.bbende.gwt.notes</groupId>

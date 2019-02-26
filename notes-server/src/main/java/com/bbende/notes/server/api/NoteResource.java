@@ -33,11 +33,11 @@ public class NoteResource {
 
     public NoteResource() {
         Note note1 = new Note();
-        note1.setText("This is note 1.");
+        note1.text = "This is note 1.";
         create(note1);
 
         Note note2 = new Note();
-        note2.setText("This is note 2.");
+        note2.text = "This is note 2.";
         create(note2);
     }
 
@@ -51,7 +51,7 @@ public class NoteResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Note note) {
-        note.setId(idCounter.getAndIncrement());
+        note.id = idCounter.getAndIncrement();
         synchronized (notes) {
             notes.add(note);
         }
@@ -61,12 +61,12 @@ public class NoteResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("id") String id) {
+    public Response get(@PathParam("id") Integer id) {
         synchronized (notes) {
             Iterator<Note> iter = notes.iterator();
             while (iter.hasNext()) {
                 Note note = iter.next();
-                if (note.getId().toString().equals(id)) {
+                if (note.id == id.intValue()) {
                     return Response.ok(note).build();
                 }
             }
@@ -79,13 +79,13 @@ public class NoteResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response put(@PathParam("id") final String id, Note note) {
+    public Response put(@PathParam("id") final Integer id, Note note) {
         synchronized (notes) {
             Iterator<Note> iter = notes.iterator();
             while (iter.hasNext()) {
                 Note existingNote = iter.next();
-                if (existingNote.getId().toString().equals(id)) {
-                    existingNote.setText(note.getText());
+                if (note.id == id.intValue()) {
+                    existingNote.text = note.text;
                     return Response.ok(note).build();
                 }
             }
@@ -98,12 +98,12 @@ public class NoteResource {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@PathParam("id") final String id) {
+    public Response delete(@PathParam("id") final Integer id) {
         synchronized (notes) {
             Iterator<Note> iter = notes.iterator();
             while (iter.hasNext()) {
                 Note note = iter.next();
-                if (note.getId().toString().equals(id)) {
+                if (note.id == id.intValue()) {
                     iter.remove();
                     return Response.ok(note).build();
                 }
