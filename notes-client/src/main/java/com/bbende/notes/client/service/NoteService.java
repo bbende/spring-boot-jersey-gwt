@@ -20,6 +20,7 @@ import org.gwtproject.http.client.RequestBuilder;
 import org.gwtproject.http.client.RequestCallback;
 import org.gwtproject.http.client.RequestException;
 import org.gwtproject.http.client.Response;
+import org.gwtproject.user.window.client.Cookies;
 
 public class NoteService {
 
@@ -50,6 +51,11 @@ public class NoteService {
 
         final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/api/notes");
         request.setHeader("Content-Type", "application/json");
+        request.setHeader("Accept", "application/json");
+
+        final String xsrfToken = Cookies.getCookie("XSRF-TOKEN");
+        request.setHeader("X-XSRF-TOKEN", xsrfToken);
+
         try {
             request.sendRequest(jsonNote, new RequestCallback(){
                 @Override

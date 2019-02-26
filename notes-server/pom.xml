@@ -169,7 +169,12 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <excludeArtifactIds>notes-client</excludeArtifactIds>
+                    <excludes>
+                        <exclude>
+                            <groupId>com.bbende.gwt.notes</groupId>
+                            <artifactId>notes-client</artifactId>
+                        </exclude>
+                    </excludes>
                     <jvmArguments>-Dserver.port=${server.port}</jvmArguments>
                 </configuration>
                 <executions>
