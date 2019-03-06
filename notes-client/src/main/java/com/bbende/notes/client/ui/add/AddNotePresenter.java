@@ -62,7 +62,7 @@ public class AddNotePresenter implements Presenter {
             }
 
             @Override
-            public void onError(final Request request, final Throwable exception) {
+            public void onError(final Throwable exception) {
                 DomGlobal.alert("Error: " + exception.getMessage());
             }
         });

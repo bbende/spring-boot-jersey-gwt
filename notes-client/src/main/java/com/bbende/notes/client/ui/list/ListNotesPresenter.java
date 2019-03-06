@@ -46,12 +46,12 @@ public class ListNotesPresenter implements Presenter {
     private void loadNotes() {
         service.getNotes(new ServiceCallback<Note[]>() {
             @Override
-            public void onSuccess(Request request, Note[] notes) {
+            public void onSuccess(final Request request, final Note[] notes) {
                 view.setNotes(notes);
             }
 
             @Override
-            public void onError(Request request, Throwable exception) {
+            public void onError(final Throwable exception) {
                 DomGlobal.alert("Error: " + exception.getMessage());
             }
         });

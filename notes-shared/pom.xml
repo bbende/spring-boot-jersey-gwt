@@ -33,7 +33,7 @@
             <version>${gwt.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- -->
+        <!-- Needed to annotate DTO classes -->
         <dependency>
             <groupId>com.google.jsinterop</groupId>
             <artifactId>jsinterop-annotations</artifactId>

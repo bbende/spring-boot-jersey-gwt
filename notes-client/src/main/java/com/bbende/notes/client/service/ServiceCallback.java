@@ -6,6 +6,6 @@ public interface ServiceCallback<T> {
 
     void onSuccess(Request request, T dto);
 
-    void onError(Request request, Throwable exception);
+    void onError(Throwable exception);
 
 }

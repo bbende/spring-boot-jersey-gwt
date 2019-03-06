@@ -25,11 +25,6 @@
     <artifactId>notes-client</artifactId>
     <packaging>gwt-app</packaging>
 
-    <properties>
-        <module.name>com.bbende.notes.Notes</module.name>
-        <module.shortName>notes</module.shortName>
-    </properties>
-
     <dependencies>
         <!-- Needed for extending EntryPoint, don't use anything else in com.google.gwt -->
         <dependency>
@@ -106,6 +101,9 @@
                         **/*.html
                     </include>
                 </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>
@@ -114,21 +112,8 @@
                 <groupId>net.ltgt.gwt.maven</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
                 <configuration>
-                    <compilerArgs>
-                        <compilerArg>-generateJsInteropExports</compilerArg>
-                    </compilerArgs>
-                    <codeserverArgs>
-                        <codeserverArg>-generateJsInteropExports</codeserverArg>
-                    </codeserverArgs>
-                    <devmodeArgs>
-                        <devmodeArg>-generateJsInteropExports</devmodeArg>
-                        <devmodeArg>-startupUrl</devmodeArg>
-                        <devmodeArg>index.html</devmodeArg>
-                    </devmodeArgs>
-                    <logLevel>INFO</logLevel>
-                    <moduleName>${module.name}</moduleName>
-                    <moduleShortName>${module.shortName}</moduleShortName>
-                    <sourceLevel>1.8</sourceLevel>
+                    <moduleName>com.bbende.notes.Notes</moduleName>
+                    <moduleShortName>notes</moduleShortName>
                 </configuration>
             </plugin>
             <!-- Adds generated sources from annotation processors as sources -->

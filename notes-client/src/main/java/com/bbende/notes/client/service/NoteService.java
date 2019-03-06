@@ -36,13 +36,12 @@ public class NoteService {
 
                 @Override
                 public void onError(final Request request, final Throwable exception) {
-                    callback.onError(request, exception);
+                    callback.onError(exception);
                 }
             });
 
         } catch (RequestException e) {
-            // TODO handle this error
-            e.printStackTrace();
+            callback.onError(e);
         }
     }
 
@@ -66,13 +65,12 @@ public class NoteService {
 
                 @Override
                 public void onError(final Request request, final Throwable exception) {
-                    callback.onError(request, exception);
+                    callback.onError(exception);
                 }
             });
 
         } catch (RequestException e) {
-            // TODO handle this error
-            e.printStackTrace();
+            callback.onError(e);
         }
     }
 

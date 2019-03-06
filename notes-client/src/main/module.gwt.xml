@@ -22,10 +22,11 @@
     <inherits name="org.gwtproject.user.window.Window"/>
     <inherits name="org.gwtproject.user.history.History"/>
 
-    <inherits name="com.bbende.notes.Shared" />
+    <!-- Note: We don't need to inherit the shared module b/c the Maven plugin will add it automatically -->
 
     <entry-point class="com.bbende.notes.client.Application"/>
 
-    <source path="client"/>
+    <!-- Source path will be across all packages in client and shared modules -->
+    <source path=""/>
 
 </module>

@@ -16,11 +16,10 @@ package com.bbende.notes.client.mvp;
 
 
 import elemental2.dom.HTMLElement;
+import org.jboss.gwt.elemento.core.IsElement;
 
-public abstract class AbstractView<P extends Presenter, E extends HTMLElement>
-        implements View<P,E> {
+public abstract class AbstractView<E extends HTMLElement> implements IsElement<E> {
 
-    protected P presenter;
     protected final E element;
 
     public AbstractView() {
@@ -28,11 +27,6 @@ public abstract class AbstractView<P extends Presenter, E extends HTMLElement>
     }
 
     protected abstract E createView();
-
-    @Override
-    public void setPresenter(final P presenter) {
-        this.presenter = presenter;
-    }
 
     @Override
     public E element() {
